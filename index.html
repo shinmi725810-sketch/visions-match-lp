@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VISIONS Match — AIと専門家が、あなたの健康を変える</title>
+  <meta name="description" content="食事写真を送るだけでAIが栄養解析。パーソナルトレーナー・理学療法士とオンライン相談。LINEで完結する次世代ヘルスコーチングアプリ。" />
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dark: #9A7A30;
+      --black: #0A0A0A;
+      --black-mid: #141414;
+      --black-card: #1A1A1A;
+      --black-border: #2A2A2A;
+      --white: #FFFFFF;
+      --white-dim: rgba(255,255,255,0.7);
+      --white-faint: rgba(255,255,255,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--black-border);
+    }
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
+    .nav-cta {
+      display: inline-block;
+      padding: 10px 28px;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%),
+        var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 18px;
+      border: 1px solid var(--gold-dark);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--white-dim);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      position: relative;
+    }
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      border: 1px solid var(--gold-dark);
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    /* LINE icon SVG inline */
+    .line-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 96px 24px; }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .section-title span { color: var(--gold); }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--white-dim);
+      max-width: 560px;
+    }
+
+    /* ── FEATURES ── */
+    .features { background: var(--black-mid); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .feature-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: var(--gold-dark); }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(201,168,76,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .feature-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .feature-card p { font-size: 0.9rem; color: var(--white-dim); }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 56px;
+      max-width: 640px;
+    }
+    .step {
+      display: flex;
+      gap: 24px;
+      position: relative;
+    }
+    .step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-line {
+      width: 1px;
+      flex: 1;
+      background: var(--black-border);
+      margin: 8px 0;
+      min-height: 40px;
+    }
+    .step:last-child .step-line { display: none; }
+    .step-body { padding-bottom: 40px; }
+    .step-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; margin-top: 8px; }
+    .step-body p { font-size: 0.9rem; color: var(--white-dim); }
+
+    /* ── PRICING ── */
+    .pricing { background: var(--black-mid); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .plan-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 12px;
+      padding: 36px 28px;
+      position: relative;
+    }
+    .plan-card.featured {
+      border-color: var(--gold);
+      background: linear-gradient(160deg, rgba(201,168,76,0.08) 0%, var(--black-card) 60%);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .plan-name { font-size: 0.75rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 12px; }
+    .plan-price { font-size: 2.5rem; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+    .plan-price span { font-size: 1rem; font-weight: 400; color: var(--white-dim); }
+    .plan-desc { font-size: 0.85rem; color: var(--white-dim); margin-bottom: 24px; border-bottom: 1px solid var(--black-border); padding-bottom: 20px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .plan-features li { font-size: 0.875rem; display: flex; gap: 10px; align-items: flex-start; }
+    .plan-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+
+    /* ── PROFESSIONAL ── */
+    .pro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .pro-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 12px;
+      padding: 32px 28px;
+    }
+    .pro-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .pro-card p { font-size: 0.875rem; color: var(--white-dim); }
+    .pro-founding {
+      margin-top: 40px;
+      padding: 32px;
+      border: 1px solid var(--gold-dark);
+      border-radius: 12px;
+      background: rgba(201,168,76,0.05);
+    }
+    .pro-founding h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--gold); }
+    .pro-founding p { font-size: 0.9rem; color: var(--white-dim); }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      text-align: center;
+      background:
+        radial-gradient(ellipse 70% 80% at 50% 100%, rgba(201,168,76,0.1) 0%, transparent 70%),
+        var(--black);
+    }
+    .cta-section h2 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .cta-section h2 span { color: var(--gold); }
+    .cta-section p { font-size: 1.05rem; color: var(--white-dim); margin-bottom: 40px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--black-border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-logo { font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 12px; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      section { padding: 64px 20px; }
+      .btn-primary, .btn-secondary { padding: 14px 28px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VISIONS Match</div>
+  <a href="https://line.me/R/ti/p/@visions-match" class="nav-cta">LINEで始める</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">LINE × AI × 専門家</div>
+  <h1>あなたの健康を、<br><span>AIと専門家</span>が変える</h1>
+  <p>食事写真を送るだけでAIが栄養解析。パーソナルトレーナー・理学療法士と、LINEでそのまま相談・予約。</p>
+  <div class="hero-cta-group">
+    <a href="https://line.me/R/ti/p/@visions-match" class="btn-primary">
+      <svg class="line-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.48 2 2 6.03 2 11c0 3.07 1.68 5.77 4.24 7.46L5.5 22l4.14-2.18A10.6 10.6 0 0012 20c5.52 0 10-4.03 10-9S17.52 2 12 2z" fill="#000"/>
+      </svg>
+      無料で始める
+    </a>
+    <a href="#features" class="btn-secondary">機能を見る</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">健康管理を、<span>もっとシンプルに</span></h2>
+    <p class="section-sub">アプリのインストール不要。LINEを開くだけで、AIコーチと専門家があなたをサポート。</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <h3>食事写真で栄養解析</h3>
+        <p>写真を送るだけでAIが料理を認識し、カロリー・タンパク質・脂質・炭水化物を自動計算。具体的なフィードバックをリアルタイムで返信。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AIヘルスコーチ（無制限）</h3>
+        <p>ダイエット・筋トレ・睡眠・ストレスなど、何でも相談できるAIコーチ。ChatGPT・Gemini無料プランより多く使える無制限チャット。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍⚕️</div>
+        <h3>専門家とオンライン相談</h3>
+        <p>パーソナルトレーナー・理学療法士・柔道整復師と、LINEからそのまま予約。オンライン・電話・対面から選択可能。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>体重・食事の記録管理</h3>
+        <p>毎日の体重・食事ログを自動集計。目標体重に向けた進捗をAIがサポートし、継続しやすい環境を提供。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>セッション後AIサマリー</h3>
+        <p>専門家とのセッション後、AIが会話を文字起こし・要約してLINEに送付。次回の目標と宿題を自動整理。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Stripe決済で安全・簡単</h3>
+        <p>予約・決済はすべてLINE内で完結。クレジットカードで安全に支払い、領収書も自動発行。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">はじめ方は、<span>3ステップ</span></h2>
+    <p class="section-sub">アプリのダウンロードは不要。今すぐLINEから使い始められます。</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <h3>LINEで友だち追加</h3>
+          <p>VISIONS Match の公式LINEアカウントを友だち追加するだけ。登録・設定は不要です。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <h3>食事写真を送る / AIに相談する</h3>
+          <p>食事の写真を送ると栄養解析が返ってきます。テキストでダイエット・体調の悩みを相談することもできます。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <h3>専門家に相談・予約する</h3>
+          <p>もっと本格的なサポートが必要なら、専門家一覧から選んでそのまま予約。オンラインセッションも対応。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">シンプルな<span>料金プラン</span></h2>
+    <p class="section-sub">まずは無料から。いつでもアップグレード・解約できます。</p>
+    <div class="pricing-grid">
+      <div class="plan-card">
+        <div class="plan-name">FREE</div>
+        <div class="plan-price">¥0<span>/月</span></div>
+        <p class="plan-desc">まずは試してみたい方へ</p>
+        <ul class="plan-features">
+          <li>AIチャット 無制限</li>
+          <li>食事写真解析 10回/月</li>
+          <li>体重・食事記録</li>
+          <li>専門家プロフィール閲覧</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-badge">人気 No.1</div>
+        <div class="plan-name">MATCH LIGHT</div>
+        <div class="plan-price">¥980<span>/月</span></div>
+        <p class="plan-desc">7日間無料トライアル付き（年額 ¥9,800）</p>
+        <ul class="plan-features">
+          <li>AIチャット 無制限</li>
+          <li>食事写真解析 <strong>無制限</strong></li>
+          <li>体重・食事記録</li>
+          <li>専門家相談・予約</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">MATCH PRO</div>
+        <div class="plan-price">¥1,980<span>/月</span></div>
+        <p class="plan-desc">7日間無料トライアル付き（年額 ¥19,800）</p>
+        <ul class="plan-features">
+          <li>AIチャット 無制限</li>
+          <li>食事写真解析 無制限</li>
+          <li>体重・食事記録</li>
+          <li>専門家相談・予約</li>
+          <li>プロ相談チケット 月1回（¥3,000相当）</li>
+        </ul>
+      </div>
+      <div class="plan-card" style="border-color: var(--gold-dark);">
+        <div class="plan-name" style="color: var(--gold-light);">EARLY BIRD</div>
+        <div class="plan-price" style="color: var(--gold);">¥300<span>/月</span></div>
+        <p class="plan-desc">先着30名限定・永久固定価格</p>
+        <ul class="plan-features">
+          <li>AIチャット 無制限</li>
+          <li>食事写真解析 無制限</li>
+          <li>体重・食事記録</li>
+          <li>専門家相談・予約</li>
+          <li style="color: var(--gold);">¥300永久固定（値上げなし）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFESSIONAL -->
+<section id="professional">
+  <div class="section-inner">
+    <div class="section-label">For Professionals</div>
+    <h2 class="section-title">専門家として<span>掲載する</span></h2>
+    <p class="section-sub">パーソナルトレーナー・理学療法士・柔道整復師の方へ。掲載料無料、初期手数料0%でスタートできます。</p>
+    <div class="pro-grid">
+      <div class="pro-card">
+        <h3>📋 プロフィール掲載</h3>
+        <p>得意分野・経歴・対応エリア・料金を掲載。LINEアカウントに直接問い合わせが届きます。</p>
+      </div>
+      <div class="pro-card">
+        <h3>📅 予約管理</h3>
+        <p>空き枠を設定するだけで自動予約受付。Stripe経由で安全に報酬を受け取れます。</p>
+      </div>
+      <div class="pro-card">
+        <h3>🤖 AIセッションサマリー</h3>
+        <p>セッション後、AIが自動で議事録・次回目標を作成。クライアントと共有できます。</p>
+      </div>
+    </div>
+    <div class="pro-founding">
+      <h3>Founding Member 先着50名</h3>
+      <p>ローンチ初期の先着50名は「Founding Member」として、<strong>手数料永久0%</strong>が適用されます。掲載料も0円。今すぐ登録して枠を確保してください。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-inner">
+    <h2>今すぐ、<span>健康を変える</span>一歩を</h2>
+    <p>LINEを開くだけ。インストール不要、登録30秒。</p>
+    <div class="hero-cta-group">
+      <a href="https://line.me/R/ti/p/@visions-match" class="btn-primary">
+        <svg class="line-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.03 2 11c0 3.07 1.68 5.77 4.24 7.46L5.5 22l4.14-2.18A10.6 10.6 0 0012 20c5.52 0 10-4.03 10-9S17.52 2 12 2z" fill="#000"/>
+        </svg>
+        無料で始める
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VISIONS Match</div>
+  <p>© 2026 VISIONS Match. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
