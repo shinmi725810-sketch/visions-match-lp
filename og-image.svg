@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="Helvetica Neue, Helvetica, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E8F5E9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Left half: iPhone frame -->
+  <!-- iPhone outer shell -->
+  <rect x="60" y="60" width="430" height="510" rx="50" ry="50" fill="#1A1A1A" />
+  <!-- iPhone screen -->
+  <rect x="80" y="90" width="390" height="450" rx="12" ry="12" fill="#F5F5F5" />
+
+  <!-- Notch -->
+  <rect x="210" y="88" width="130" height="28" rx="14" ry="14" fill="#1A1A1A" />
+
+  <!-- Chat header bar -->
+  <rect x="80" y="118" width="390" height="52" rx="0" ry="0" fill="#FFFFFF" />
+  <circle cx="120" cy="144" r="20" fill="#00B900" />
+  <text x="148" y="140" font-size="15" fill="#1A3E5C" font-weight="bold">AI&#x5065;&#x5EB7;&#x30B3;&#x30FC;&#x30C1;</text>
+  <text x="148" y="158" font-size="11" fill="#888888">&#x30AA;&#x30F3;&#x30E9;&#x30A4;&#x30F3;</text>
+  <!-- Header separator -->
+  <line x1="80" y1="170" x2="470" y2="170" stroke="#E0E0E0" stroke-width="1" />
+
+  <!-- Chat bubble 1: user (grey, right) -->
+  <rect x="200" y="185" width="255" height="62" rx="16" ry="16" fill="#E5E5EA" />
+  <text x="220" y="209" font-size="14" fill="#333333">&#x4ECA;&#x65E5;&#x30E9;&#x30FC;&#x30E1;&#x30F3;&#x98DF;&#x3079;&#x3061;&#x3083;&#x3063;&#x305F;</text>
+  <text x="220" y="232" font-size="18">&#127837;</text>
+  <!-- User avatar -->
+  <circle cx="185" cy="216" r="12" fill="#BBBBBB" />
+  <text x="179" y="221" font-size="12" fill="#FFFFFF">U</text>
+
+  <!-- Chat bubble 2: AI (LINE green, left) -->
+  <rect x="95" y="268" width="310" height="82" rx="16" ry="16" fill="#00B900" />
+  <text x="115" y="292" font-size="13" fill="#FFFFFF">&#x304A;&#x75B2;&#x308C;&#x3055;&#x307E;&#x3002;&#x660E;&#x65E5;&#x306E;&#x671D;&#x306F;</text>
+  <text x="115" y="312" font-size="13" fill="#FFFFFF">&#x91CE;&#x83DC;&#x30B9;&#x30FC;&#x30D7;&#x3067;&#x6574;&#x3048;&#x3088;&#x3046;</text>
+  <text x="115" y="336" font-size="18">&#127807;</text>
+  <!-- AI avatar -->
+  <circle cx="450" cy="309" r="12" fill="#00B900" />
+  <text x="445" y="314" font-size="11" fill="#FFFFFF">AI</text>
+
+  <!-- Chat bubble 3: user -->
+  <rect x="195" y="370" width="265" height="46" rx="16" ry="16" fill="#E5E5EA" />
+  <text x="215" y="388" font-size="13" fill="#333333">&#x904B;&#x52D5;&#x3082;&#x30A2;&#x30C9;&#x30D0;&#x30A4;&#x30B9;&#x6B32;&#x3057;&#x3044;</text>
+  <text x="215" y="408" font-size="12" fill="#555555">&#x6B69;&#x6570;&#x3092;&#x30B7;&#x30A7;&#x30A2;&#x3057;&#x307E;&#x3059;&#x304B;&#xFF1F;</text>
+  <!-- User avatar -->
+  <circle cx="182" cy="393" r="12" fill="#BBBBBB" />
+  <text x="176" y="398" font-size="12" fill="#FFFFFF">U</text>
+
+  <!-- Bottom input bar -->
+  <rect x="80" y="440" width="390" height="50" rx="0" ry="0" fill="#FFFFFF" />
+  <rect x="90" y="452" width="300" height="28" rx="14" ry="14" fill="#F0F0F0" />
+  <text x="110" y="471" font-size="13" fill="#AAAAAA">&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x3092;&#x5165;&#x529B;...</text>
+  <circle cx="425" cy="466" r="16" fill="#00B900" />
+  <text x="418" y="472" font-size="18" fill="#FFFFFF">&#x279C;</text>
+
+  <!-- Right half: Text content -->
+  <!-- Leaf decoration top right -->
+  <ellipse cx="1060" cy="80" rx="40" ry="20" fill="#C8E6C9" transform="rotate(-30 1060 80)" />
+  <ellipse cx="1120" cy="100" rx="30" ry="15" fill="#A5D6A7" transform="rotate(-45 1120 100)" />
+  <ellipse cx="1000" cy="60" rx="25" ry="12" fill="#DCEDC8" transform="rotate(-15 1000 60)" />
+
+  <!-- Logo -->
+  <text x="560" y="200" font-size="58" font-weight="900" fill="#1A3E5C" letter-spacing="-1">VISIONS</text>
+  <text x="560" y="265" font-size="58" font-weight="900" fill="#1A3E5C" letter-spacing="-1">Match</text>
+
+  <!-- Green accent line under logo -->
+  <rect x="560" y="278" width="300" height="5" rx="3" fill="#00B900" />
+
+  <!-- Subcopy -->
+  <text x="560" y="340" font-size="30" fill="#4A5568">LINE&#x3067;&#x8A71;&#x305B;&#x308B;</text>
+  <text x="560" y="378" font-size="30" fill="#4A5568">AI&#x5065;&#x5EB7;&#x30B3;&#x30FC;&#x30C1;</text>
+
+  <!-- Price badge -->
+  <rect x="555" y="410" width="280" height="80" rx="12" fill="#FFF5F5" stroke="#E53E3E" stroke-width="2" />
+  <text x="580" y="442" font-size="18" fill="#E53E3E">&#x6708;&#x984D;&#x6599;&#x91D1;</text>
+  <text x="580" y="480" font-size="42" font-weight="900" fill="#E53E3E">&#xA5;300/&#x6708;</text>
+
+  <!-- Leaf decoration bottom right -->
+  <ellipse cx="1100" cy="560" rx="45" ry="22" fill="#C8E6C9" transform="rotate(20 1100 560)" />
+  <ellipse cx="1150" cy="530" rx="30" ry="15" fill="#A5D6A7" transform="rotate(35 1150 530)" />
+  <ellipse cx="1050" cy="580" rx="35" ry="17" fill="#DCEDC8" transform="rotate(10 1050 580)" />
+</svg>

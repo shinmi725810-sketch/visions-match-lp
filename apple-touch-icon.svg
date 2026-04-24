@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" font-family="Helvetica Neue, Helvetica, -apple-system, sans-serif">
+  <!-- Background rounded square -->
+  <rect width="180" height="180" rx="40" ry="40" fill="#00B900" />
+  <!-- Leaf shape -->
+  <path d="M90 30 C124 30 148 54 148 90 C148 126 124 150 90 150 C56 150 56 114 90 38 Z" fill="#FFFFFF" opacity="0.95" />
+  <path d="M90 38 C66 72 56 100 56 124 C64 138 76 145 90 147" fill="none" stroke="#00B900" stroke-width="8" stroke-linecap="round" />
+  <!-- Stem -->
+  <line x1="90" y1="38" x2="90" y2="150" stroke="#00B900" stroke-width="8" stroke-linecap="round" />
+</svg>
