@@ -453,13 +453,26 @@
       .email-signup button[type="submit"] { width: 100%; flex: none; }
     }
   </style>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      'anonymize_ip': true,
+      'cookie_flags': 'SameSite=None;Secure'
+    });
+  </script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <div class="nav-logo">VISIONS Match</div>
-  <a href="https://line.me/R/ti/p/@visions-match" class="nav-cta">LINEで始める</a>
+  <a href="https://line.me/R/ti/p/@visions-match" class="nav-cta"
+     onclick="gtag('event', 'line_friend_add', {'event_category':'conversion','event_label':'nav'});">LINEで始める</a>
 </nav>
 
 <!-- HERO -->
@@ -468,7 +481,8 @@
   <h1>あなたの健康を、<br><span>AIと専門家</span>が変える</h1>
   <p>食事写真を送るだけでAIが栄養解析。パーソナルトレーナー・理学療法士と、LINEでそのまま相談・予約。</p>
   <div class="hero-cta-group">
-    <a href="https://line.me/R/ti/p/@visions-match" class="btn-primary">
+    <a href="https://line.me/R/ti/p/@visions-match" class="btn-primary"
+       onclick="gtag('event', 'line_friend_add', {'event_category':'conversion','event_label':'hero'});">
       <svg class="line-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2C6.48 2 2 6.03 2 11c0 3.07 1.68 5.77 4.24 7.46L5.5 22l4.14-2.18A10.6 10.6 0 0012 20c5.52 0 10-4.03 10-9S17.52 2 12 2z" fill="#000"/>
       </svg>
@@ -624,7 +638,8 @@
   <div class="section-inner">
     <h2>先行アクセス登録</h2>
     <p>リリース情報・限定クーポン・EARLY BIRD 枠の通知をお届け</p>
-    <form action="https://formspree.io/f/FORMSPREE_ID_HERE" method="POST">
+    <form action="https://formspree.io/f/FORMSPREE_ID_HERE" method="POST"
+          onsubmit="gtag('event', 'email_signup', {'event_category':'conversion'});">
       <input type="email" name="email" placeholder="メールアドレス" required>
       <input type="text" name="name" placeholder="お名前 (任意)">
       <button type="submit">登録する</button>
@@ -666,7 +681,8 @@
     <h2>今すぐ、<span>健康を変える</span>一歩を</h2>
     <p>LINEを開くだけ。インストール不要、登録30秒。</p>
     <div class="hero-cta-group">
-      <a href="https://line.me/R/ti/p/@visions-match" class="btn-primary">
+      <a href="https://line.me/R/ti/p/@visions-match" class="btn-primary"
+         onclick="gtag('event', 'line_friend_add', {'event_category':'conversion','event_label':'cta_section'});">
         <svg class="line-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.03 2 11c0 3.07 1.68 5.77 4.24 7.46L5.5 22l4.14-2.18A10.6 10.6 0 0012 20c5.52 0 10-4.03 10-9S17.52 2 12 2z" fill="#000"/>
         </svg>
@@ -681,6 +697,24 @@
   <div class="footer-logo">VISIONS Match</div>
   <p>© 2026 VISIONS Match. All rights reserved.</p>
 </footer>
+
+<script>
+(function(){
+  var maxScroll = 0;
+  var tracked = {25: false, 50: false, 75: false, 100: false};
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var s = Math.round((window.pageYOffset / h) * 100);
+    if (s > maxScroll) maxScroll = s;
+    Object.keys(tracked).forEach(function(k){
+      if (maxScroll >= parseInt(k) && !tracked[k]) {
+        tracked[k] = true;
+        if (window.gtag) gtag('event', 'scroll_' + k, {'event_category':'engagement'});
+      }
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
