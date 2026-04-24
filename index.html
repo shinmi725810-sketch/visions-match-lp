@@ -5,6 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VISIONS Match — AIと専門家が、あなたの健康を変える</title>
   <meta name="description" content="食事写真を送るだけでAIが栄養解析。パーソナルトレーナー・理学療法士とオンライン相談。LINEで完結する次世代ヘルスコーチングアプリ。" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://shinmi725810-sketch.github.io/visions-match-lp/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="VISIONS Match">
+  <meta property="og:title" content="VISIONS Match — LINEで話せるAI健康コーチ ¥300/月">
+  <meta property="og:description" content="LINEで話しかけるだけの健康コーチAI。食事・運動・メンタルの相談が¥300/月。Claude Sonnet 4.6搭載。">
+  <meta property="og:url" content="https://shinmi725810-sketch.github.io/visions-match-lp/">
+  <meta property="og:image" content="https://shinmi725810-sketch.github.io/visions-match-lp/og-image.png">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VISIONS Match — LINEで話せるAI健康コーチ ¥300/月">
+  <meta name="twitter:description" content="LINEで話しかけるだけの健康コーチAI。¥300/月。">
+  <meta name="twitter:image" content="https://shinmi725810-sketch.github.io/visions-match-lp/og-image.png">
   <style>
     :root {
       --gold: #C9A84C;
@@ -343,12 +365,92 @@
     .footer-logo { font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 12px; }
     footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
 
+    /* ── EARLY BIRD COUNTER ── */
+    .early-bird-counter {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #e53e3e;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── EMAIL SIGNUP ── */
+    .email-signup {
+      background: var(--black);
+      text-align: center;
+      border-top: 1px solid var(--black-border);
+      border-bottom: 1px solid var(--black-border);
+    }
+    .email-signup h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .email-signup > p {
+      font-size: 1rem;
+      color: var(--white-dim);
+      margin-bottom: 36px;
+    }
+    .email-signup form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      max-width: 560px;
+      margin: 0 auto 16px;
+    }
+    .email-signup input[type="email"],
+    .email-signup input[type="text"] {
+      flex: 1 1 200px;
+      padding: 14px 18px;
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 6px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .email-signup input[type="email"]:focus,
+    .email-signup input[type="text"]:focus {
+      border-color: var(--gold-dark);
+    }
+    .email-signup input::placeholder { color: rgba(255,255,255,0.35); }
+    .email-signup button[type="submit"] {
+      padding: 14px 32px;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .email-signup button[type="submit"]:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+    .email-signup .note {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 0;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       nav { padding: 16px 20px; }
       .hero { padding: 100px 20px 60px; }
       section { padding: 64px 20px; }
       .btn-primary, .btn-secondary { padding: 14px 28px; font-size: 0.9rem; }
+      .email-signup form { flex-direction: column; }
+      .email-signup input[type="email"],
+      .email-signup input[type="text"],
+      .email-signup button[type="submit"] { width: 100%; flex: none; }
     }
   </style>
 </head>
@@ -511,8 +613,23 @@
           <li>専門家相談・予約</li>
           <li style="color: var(--gold);">¥300永久固定（値上げなし）</li>
         </ul>
+        <span class="early-bird-counter">残り 27 / 30 名</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="email-signup" id="signup">
+  <div class="section-inner">
+    <h2>先行アクセス登録</h2>
+    <p>リリース情報・限定クーポン・EARLY BIRD 枠の通知をお届け</p>
+    <form action="https://formspree.io/f/FORMSPREE_ID_HERE" method="POST">
+      <input type="email" name="email" placeholder="メールアドレス" required>
+      <input type="text" name="name" placeholder="お名前 (任意)">
+      <button type="submit">登録する</button>
+    </form>
+    <p class="note">登録はいつでも解除できます。スパムは一切送りません。</p>
   </div>
 </section>
 
