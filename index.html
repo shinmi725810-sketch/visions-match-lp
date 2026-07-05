@@ -25,6 +25,19 @@
 <meta name="twitter:description" content="LINE完結・自宅オンラインパーソナル。全トレーナーを1人1回ずつ無料で体験・入会金0円。">
 <meta name="twitter:image" content="https://shinmi725810-sketch.github.io/visions-match-lp/og-image.png">
 
+<!-- ⚠️ Meta Pixel: YOUR_PIXEL_ID を実際のピクセルIDに置換してください -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','YOUR_PIXEL_ID');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+<!-- /Meta Pixel -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
@@ -171,25 +184,34 @@
   .pq{background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px;box-shadow:var(--shadow-sm);font-size:.86rem;color:var(--ink)}
   .pq .stars{color:#FFB400;font-size:.8rem}
   .pq .who{display:block;color:var(--ink-faint);font-size:.72rem;margin-top:7px}
-  /* Google reviews */
-  .g-summary{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow-sm)}
-  .g-summary .gicon{width:26px;height:26px;flex:0 0 auto}
-  .g-summary .g-num{font-family:var(--num);font-weight:800;font-size:1.5rem;color:var(--ink)}
-  .g-summary .g-stars{color:#FBBC04;font-size:1.05rem;letter-spacing:1px}
-  .g-summary .g-cnt{color:var(--ink-dim);font-size:.82rem;font-weight:600}
-  .reviews{column-count:2;column-gap:14px;margin-top:16px}
+  /* お客様の声（レビューカード） */
+  .reviews{column-count:2;column-gap:14px;margin-top:22px}
   .rev{break-inside:avoid;background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow-sm);margin-bottom:14px;width:100%}
   .rev-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
   .rev-av{width:38px;height:38px;border-radius:50%;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex:0 0 auto}
   .rev-meta{flex:1;min-width:0}
   .rev-name{font-weight:700;color:var(--ink);font-size:.88rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .rev-date{color:var(--ink-faint);font-size:.72rem}
-  .rev-g{width:17px;height:17px;flex:0 0 auto}
   .rev-stars{color:#FBBC04;font-size:.88rem;letter-spacing:1px;margin-bottom:6px}
   .rev-text{color:var(--ink-dim);font-size:.85rem;line-height:1.7;white-space:pre-line}
   .rev-text.clamp{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
   .rev-more{background:none;border:none;color:var(--teal-d);font-size:.8rem;font-weight:700;cursor:pointer;padding:8px 0 0;font-family:inherit}
   @media(max-width:560px){.reviews{column-count:1}}
+  /* footer (legal) */
+  .site-footer{background:var(--navy);color:rgba(255,255,255,.82);padding:34px 0 26px;font-size:.82rem;line-height:1.9}
+  .site-footer .wrap{max-width:760px}
+  .site-footer .f-brand{font-family:var(--num);font-weight:800;letter-spacing:.16em;color:#fff;font-size:1.05rem}
+  .site-footer .f-brand b{color:var(--teal)}
+  .site-footer details{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:2px 16px;margin-top:12px;box-shadow:none}
+  .site-footer details[open]{border-color:rgba(255,255,255,.28)}
+  .site-footer summary{color:#fff;font-weight:700;padding:13px 0;font-size:.86rem;gap:8px}
+  .site-footer summary .q{background:var(--teal-d)}
+  .site-footer details p,.site-footer details dl{padding:0 0 14px;color:rgba(255,255,255,.8);font-size:.8rem}
+  .site-footer dl{display:grid;grid-template-columns:8.5em 1fr;gap:6px 10px;margin:0}
+  .site-footer dt{color:rgba(255,255,255,.6)}
+  .site-footer dd{margin:0}
+  .site-footer .todo{color:#FFD23F;font-weight:700}
+  .site-footer .f-copy{margin-top:20px;color:rgba(255,255,255,.5);font-size:.74rem;text-align:center}
 
   /* comparison */
   .tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:24px;font-size:.83rem;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
@@ -365,14 +387,8 @@
 <section class="voice">
   <div class="wrap reveal">
     <div class="sec-head"><div class="eyebrow">Voice</div><h2>“私でもできた！”<br><span class="cl">ご満足の声、続々。</span></h2></div>
-    <div class="g-summary">
-      <svg class="gicon" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      <span class="g-num">4.8</span>
-      <span class="g-stars" aria-label="5つ星中4.8">★★★★★</span>
-      <span class="g-cnt">Googleクチコミ 41件</span>
-    </div>
     <div class="reviews" id="reviews"></div>
-    <p class="fineprint" style="text-align:center;margin-top:16px">※感想には個人差があります。掲載はお客様の声の一部です。</p>
+    <p class="fineprint" style="text-align:center;margin-top:16px">※掲載許諾をいただいた体験者の声です。効果・感想には個人差があり、成果を保証するものではありません。</p>
   </div>
 </section>
 
@@ -411,7 +427,7 @@
       <div class="price">¥3,000<small>/ 1回（30分・食事サポート付き）</small></div>
       <p class="opts">初回まとめて <b>¥12,000</b>（4回分・食事サポート1ヶ月込み）</p>
     </div>
-    <p class="fineprint">入会金0円・税抜。セッションは30分です。</p>
+    <p class="fineprint">入会金0円・表示価格はすべて税込です。セッションは30分。</p>
     <div class="cta-row" style="margin-top:22px"><a class="cta line" href="https://lin.ee/Q5ynBlo"><span class="ico">L</span><span class="cta-txt"><b>LINE追加してトレーナーを見てみる</b><small>体験無料・全トレーナー1回ずつ無料で体験できる</small></span></a></div>
   </div>
 </section>
@@ -438,6 +454,37 @@
     <p class="cta-sub">友だち追加するだけ。無料体験もこちらから。</p>
   </div>
 </section>
+
+<!-- FOOTER（特商法・運営者・プライバシー）※【要記入】は実際の事業者情報に差し替え -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="f-brand">VISI<b>O</b>NS</div>
+    <p style="margin-top:6px">トレーナーを選べる、LINE完結のオンラインパーソナル。</p>
+
+    <details>
+      <summary><span class="q">i</span>特定商取引法に基づく表記</summary>
+      <dl>
+        <dt>販売事業者</dt><dd class="todo">【事業者名を記入】</dd>
+        <dt>運営統括責任者</dt><dd class="todo">【氏名を記入】</dd>
+        <dt>所在地</dt><dd class="todo">【住所を記入】（請求があれば遅滞なく開示します）</dd>
+        <dt>連絡先</dt><dd class="todo">【メール／電話を記入】（電話は請求により遅滞なく開示）</dd>
+        <dt>販売価格</dt><dd>各プラン欄に税込で表示（無料体験¥0／初回限定¥3,000／まとめて¥12,000 ほか）</dd>
+        <dt>商品代金以外の必要料金</dt><dd>入会金・指名料は無料。通信料はお客様のご負担。</dd>
+        <dt>お支払い方法</dt><dd>クレジットカード決済（Stripe）</dd>
+        <dt>お支払い時期</dt><dd>各プランのお申し込み・予約確定時</dd>
+        <dt>役務の提供時期</dt><dd>ご予約いただいた日時にオンラインで提供</dd>
+        <dt>キャンセル・返金</dt><dd class="todo">【キャンセル/返金ポリシーを記入】</dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary><span class="q">i</span>プライバシーポリシー</summary>
+      <p>当サービスは、お問い合わせ・お申し込み・サービス提供のために必要な範囲で個人情報（氏名・連絡先・LINE情報・健康／食事に関する情報等）を取得し、利用目的の範囲内で適切に管理します。ご本人の同意なく第三者へ提供しません（法令に基づく場合を除く）。オンラインセッションの録画を行う場合は目的・保管期間を明示し同意を得ます。開示・訂正・削除のご請求は下記連絡先まで。<span class="todo">【正式なプライバシーポリシー全文へのリンク／文面を記入】</span></p>
+    </details>
+
+    <p class="f-copy">© <span id="fy">2026</span> VISIONS. All rights reserved.</p>
+  </div>
+</footer>
 
 <div class="sticky"><a class="cta line" href="https://lin.ee/Q5ynBlo"><span class="ico">L</span><span class="cta-txt"><b>LINE追加してトレーナーを見てみる</b><small>体験無料・全トレーナー1回ずつ無料で体験できる</small></span></a></div>
 
@@ -479,11 +526,17 @@
     {name:"Mari Okada",date:"1年前",rating:5,initial:"M",text:"機材なし・部屋着のままでOKなのが最高。化粧しなくていいオンラインだから続いてる気がします。ウエスト-5cmいきました。"}
   ];
   const AV_COLORS=['#EA4335','#4285F4','#34A853','#F9AB00','#A142F4','#00ACC1','#FF7043','#5C6BC0','#26A69A','#EC407A','#7E57C2','#66BB6A'];
-  const G_ICON='<svg class="rev-g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+  /* ===== 計測: LINE友だち追加クリックを Meta Pixel の Lead として送信 ===== */
+  document.querySelectorAll('a[href^="https://lin.ee/"]').forEach(a=>{
+    a.addEventListener('click',()=>{ try{ if(typeof fbq==='function') fbq('track','Lead',{content_name:'LINE友だち追加'}); }catch(e){} });
+  });
+  /* フッターの年号を自動更新 */
+  (function(){var fy=document.getElementById('fy'); if(fy) fy.textContent=new Date().getFullYear();})();
+
   const esc=s=>s.replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
   const rvEl=document.getElementById('reviews');
   if(rvEl){
-    rvEl.innerHTML=REVIEWS.map((r,i)=>`<div class="rev"><div class="rev-head"><div class="rev-av" style="background:${AV_COLORS[i%AV_COLORS.length]}">${esc(r.initial)}</div><div class="rev-meta"><div class="rev-name">${esc(r.name)}</div><div class="rev-date">${esc(r.date)}</div></div>${G_ICON}</div><div class="rev-stars"><span style="color:#FBBC04">${'★'.repeat(r.rating)}</span><span style="color:#dadce0">${'☆'.repeat(5-r.rating)}</span></div><div class="rev-text clamp">${esc(r.text)}</div><button class="rev-more" type="button" style="display:none">続きを読む</button></div>`).join('');
+    rvEl.innerHTML=REVIEWS.map((r,i)=>`<div class="rev"><div class="rev-head"><div class="rev-av" style="background:${AV_COLORS[i%AV_COLORS.length]}">${esc(r.initial)}</div><div class="rev-meta"><div class="rev-name">${esc(r.name)}</div><div class="rev-date">体験者の声</div></div></div><div class="rev-stars"><span style="color:#FBBC04">${'★'.repeat(r.rating)}</span><span style="color:#dadce0">${'☆'.repeat(5-r.rating)}</span></div><div class="rev-text clamp">${esc(r.text)}</div><button class="rev-more" type="button" style="display:none">続きを読む</button></div>`).join('');
     rvEl.querySelectorAll('.rev').forEach(card=>{
       const txt=card.querySelector('.rev-text'), btn=card.querySelector('.rev-more');
       if(txt.scrollHeight>txt.clientHeight+2){
