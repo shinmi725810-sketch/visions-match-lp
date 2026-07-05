@@ -1,1 +1,7 @@
 node_modules/
+*-old-*.bak
+cloudgym-ref*.png
+lp-preview*.png
+tr-check.jpg
+ba-*check*.jpg
+zoom-*.png
