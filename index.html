@@ -98,7 +98,7 @@ fbq('track','PageView');
   .hero h1 .mark{background:linear-gradient(transparent 60%,var(--yellow) 60%);padding:0 .1em}
   .hero .lead{font-size:clamp(.95rem,3.6vw,1.06rem);color:var(--ink);margin:12px 0 0;font-weight:600;line-height:1.75}
   .campaign{position:relative;isolation:isolate;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;margin-top:16px;padding:13px 15px 12px;border:1px solid rgba(255,122,89,.28);border-radius:var(--r-lg);background:rgba(255,255,255,.78);box-shadow:var(--shadow-sm);overflow:hidden}
-  .campaign::before{content:"";position:absolute;inset:auto -25px -43px auto;width:110px;height:110px;background:var(--coral-soft);border-radius:50%;z-index:-1}
+  .campaign::before{content:none}
   .campaign .campaign-label{grid-column:1/-1;color:var(--coral-d);font-size:.7rem;font-weight:900;letter-spacing:.1em}
   .campaign .campaign-price{font-family:var(--num);font-weight:800;color:var(--coral-d);line-height:.95;letter-spacing:-.06em;font-size:clamp(2.05rem,9vw,2.8rem);white-space:nowrap}
   .campaign .campaign-price small{font-family:var(--sans);font-size:.38em;letter-spacing:0;font-weight:800;margin-right:4px;vertical-align:middle}
@@ -290,9 +290,15 @@ fbq('track','PageView');
   .final{background:linear-gradient(170deg,var(--teal-bg),#fff)}
   .final .guarantee{display:inline-flex;align-items:center;gap:7px;background:#fff;border:2px solid var(--teal);color:var(--teal-d);font-weight:800;font-size:.84rem;padding:8px 17px;border-radius:999px;margin-top:16px;box-shadow:var(--shadow-sm)}
 
-  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:120;background:rgba(23,58,87,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.13);padding:8px 14px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -12px 32px -22px rgba(23,58,87,.75)}
-  .sticky::before{content:"無料体験から、LINEで相談";display:block;max-width:520px;margin:0 auto 4px;color:rgba(255,255,255,.72);font-size:.63rem;font-weight:700;letter-spacing:.06em;text-align:center}
-  .sticky .cta{margin-top:0;padding:11px 20px;font-size:.9rem;min-height:48px;animation:pulse 2.6s infinite}
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:120;background:rgba(23,58,87,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.13);padding:8px 14px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -12px 32px -22px rgba(23,58,87,.75);transition:transform .35s var(--ease)}
+  .js .sticky{transform:translateY(110%)}
+  .js .sticky.is-visible{transform:translateY(0)}
+  .sticky-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:18px}
+  .sticky-caption{margin:0;color:rgba(255,255,255,.74);font-size:.75rem;font-weight:700;letter-spacing:.05em;line-height:1.35;white-space:nowrap}
+  .sticky .cta{width:auto;max-width:none;flex:0 0 auto;margin:0;padding:10px 18px;font-size:.88rem;min-height:46px;animation:pulse 2.6s infinite}
+  .sticky .cta-txt b{font-size:.9rem}.sticky .cta-txt small{font-size:.65rem;white-space:nowrap}
+  .results-note{margin-top:18px;font-size:.82rem;line-height:1.7;color:var(--ink-faint)}
+  .results-fineprint{display:none}
   .reveal .pain li,.reveal .circle,.reveal .tperson,.reveal .rev{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
   .reveal.in .pain li,.reveal.in .circle,.reveal.in .tperson,.reveal.in .rev{opacity:1;transform:none}
   .reveal.in .pain li:nth-child(2),.reveal.in .circle:nth-child(2),.reveal.in .tperson:nth-child(2),.reveal.in .rev:nth-child(2){transition-delay:.06s}
@@ -315,6 +321,14 @@ fbq('track','PageView');
     .about .row{gap:14px;padding:16px}
     .about .row .photo{flex-basis:96px;height:96px}
     .about .row .big{font-size:1.02rem}
+    body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+    .sticky{padding:7px 14px calc(7px + env(safe-area-inset-bottom))}
+    .sticky-caption{display:none}
+    .sticky-inner{display:block}
+    .sticky .cta{width:100%;min-height:50px;padding:8px 14px;gap:9px;border-radius:14px}
+    .sticky .cta-txt{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .sticky .cta-txt b{display:block;font-size:clamp(.82rem,4vw,.98rem);overflow:hidden;text-overflow:ellipsis}
+    .sticky .cta-txt small{display:none}
   }
   /* desktop editorial layout and varied section rhythm */
   @media(min-width:900px){
@@ -333,8 +347,8 @@ fbq('track','PageView');
     .hero .cta-row{text-align:left}
     .hero .cta{max-width:460px;margin-top:16px}
     .hero-visual{position:relative;display:grid;grid-template-columns:205px 1fr;align-items:end;gap:14px;padding:10px 0 5px}
-    .hero-stage{grid-row:1;grid-column:1;margin:0;width:205px;max-width:none;height:390px;aspect-ratio:auto;border-radius:20px;transform:rotate(-2.2deg);box-shadow:0 24px 52px -28px rgba(23,58,87,.6)}
-    .hero-stage img{object-fit:cover;object-position:center top}
+    .hero-stage{grid-row:1;grid-column:1;margin:0;width:205px;max-width:none;height:auto;aspect-ratio:478/996;border-radius:20px;transform:rotate(-2.2deg);box-shadow:0 24px 52px -28px rgba(23,58,87,.6)}
+    .hero-stage img{object-fit:contain;object-position:center}
     .hero-stage .zero{width:72px;height:72px;left:-9px;top:12px}
     .hero-stage .zero b{font-size:1.5rem}
     .picker{grid-row:1;grid-column:2;margin:0 0 16px;max-width:none;padding:12px;border-radius:16px;transform:translateX(-14px);box-shadow:0 18px 36px -25px rgba(23,58,87,.45)}
@@ -346,9 +360,9 @@ fbq('track','PageView');
     .tcard .chk{top:50%;right:6px;transform:translateY(-50%) scale(.4)}.tcard.active .chk{transform:translateY(-50%) scale(1)}
     .picker .cap{font-size:.68rem;margin-top:8px}
     .ba-peek{padding-top:54px}.ba-peek .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:52px;align-items:center}.ba-peek .sec-head{text-align:left}.ba-peek h2{text-align:left;font-size:clamp(2.1rem,3.2vw,3.2rem)}.ba-peek .ba-grid{margin:0;max-width:none}.ba-peek .fineprint{grid-column:2;margin-top:-36px}
-    .metrics{text-align:left;overflow:hidden}.metrics .wrap{display:grid;grid-template-columns:.76fr 1.24fr;gap:70px;align-items:center}.metrics .sec-head{text-align:left}.metrics h2{text-align:left;font-size:clamp(2.2rem,3.4vw,3.35rem)}.circles{margin:0;gap:0;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.18);border-radius:var(--r-xl);overflow:hidden}.circle{border-radius:0;padding:30px 14px;background:rgba(255,255,255,.96)}.circle:nth-child(2){background:var(--yellow);box-shadow:0 20px 32px -20px rgba(10,50,55,.65)}.reveal.in .circle:nth-child(2){transform:translateY(-13px)}.circle .v{font-size:2.35rem}.circle:nth-child(2) .v{color:var(--navy)}
-    .about .wrap{display:grid;grid-template-columns:1fr 1.5fr;gap:58px;align-items:center}.about .sec-head{text-align:left}.about h2{text-align:left;font-size:clamp(2.15rem,3vw,3rem)}.about .row{margin:0;padding:26px}.about .row .photo{flex-basis:145px;height:145px}
-    .pain{grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}.pain li{border-style:solid;border-width:1px;border-radius:0;padding:20px 18px;box-shadow:0 12px 28px -25px rgba(23,58,87,.35)}.pain li:nth-child(2),.pain li:nth-child(3){transform:translateY(24px)}.pain li:nth-child(3){background:var(--coral-soft);border-color:#ffd4c7}.pain li:nth-child(4){background:var(--teal-soft);border-color:#c6eeee}.solve{max-width:620px;margin:56px auto 0;border-radius:4px}
+    .metrics{text-align:left;overflow:hidden}.metrics .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:54px;align-items:center}.metrics .sec-head{text-align:left}.metrics h2{text-align:left;font-size:clamp(2.05rem,3vw,3.05rem);text-wrap:balance}.metrics h2 span{display:block}.circles{margin:0;gap:0;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.18);border-radius:var(--r-xl);overflow:hidden}.circle{border-radius:0;padding:30px 14px;background:rgba(255,255,255,.96)}.circle .v{font-size:2.35rem}
+    .about .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:42px;align-items:center}.about .sec-head{text-align:left}.about h2{text-align:left;font-size:clamp(2.15rem,3vw,3rem)}.about .row{margin:0;padding:26px;min-height:180px}.about .row .photo{flex-basis:145px;height:145px}
+    .pain{grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}.pain li{border-style:solid;border-width:1px;border-radius:0;padding:20px 18px;box-shadow:0 12px 28px -25px rgba(23,58,87,.35);background:#fff}.pain li:nth-child(2),.pain li:nth-child(3){transform:translateY(24px)}.pain li:nth-child(3),.pain li:nth-child(4){background:var(--coral-soft);border-color:#ffd4c7}.solve{max-width:620px;margin:56px auto 0;border-radius:4px}
     .reasons{grid-template-columns:1fr}.reasons-img{max-width:740px;margin:28px auto 0;display:block}.reason{max-width:640px;margin:auto}.zerobanner{max-width:700px;margin:34px auto 0;border-radius:4px}
     .trainers .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}.trainers .sec-head{text-align:left}.trainers h2{text-align:left;font-size:clamp(2.2rem,3vw,3.05rem)}.trainers .reasons-img{margin:0;max-width:none}.trainers .note-c{grid-column:2;margin-top:-40px;text-align:right}
     .voice .sec-head{max-width:620px;margin:0 auto 24px}.voice h2{font-size:clamp(2.25rem,3.2vw,3.2rem)}.reviews{column-count:3;column-gap:18px}
@@ -382,7 +396,7 @@ fbq('track','PageView');
           <div class="campaign-condition">期間限定（〜2026年8月31日 / 先着30名・いずれか早い方）</div>
         </aside>
         <div class="cta-row reveal">
-          <a class="cta line" href="https://lin.ee/Q5ynBlo"><span class="ico">L</span><span class="cta-txt"><b>LINE追加してトレーナーを見てみる</b><small>体験無料・全トレーナー1回ずつ無料で体験できる</small></span></a>
+          <a class="cta line" id="heroCta" href="https://lin.ee/Q5ynBlo"><span class="ico">L</span><span class="cta-txt"><b>LINE追加してトレーナーを見てみる</b><small>体験無料・全トレーナー1回ずつ無料で体験できる</small></span></a>
           <p class="cta-sub">全トレーナーを1人1回ずつ無料で体験できます</p>
         </div>
       </div>
@@ -408,18 +422,18 @@ fbq('track','PageView');
 <!-- BEFORE/AFTER（実績チラ見せ・hero直下） -->
 <section class="ba-peek">
   <div class="wrap reveal">
-    <div class="sec-head"><div class="eyebrow">Results</div><h2>理想のカラダを<br>手に入れた方々。</h2></div>
+    <div class="sec-head"><div class="eyebrow">Results</div><h2>理想のカラダを<br>手に入れた方々。</h2><p class="results-note">※効果には個人差があり、成果を保証するものではありません。</p></div>
     <div class="ba-grid">
       <div class="ba-card"><div class="ba-full"><img src="img/ba-man.jpg" alt="Before After（男性）自己流から理想の体へ" width="1164" height="1164" loading="lazy" /></div><div class="ba-meta"><div class="res">自己流 → 理想のカラダへ</div><div class="cmt">継続トレーニング＋食事サポート</div></div></div>
     </div>
-    <p class="fineprint">※効果には個人差があり、成果を保証するものではありません。</p>
+    <p class="fineprint results-fineprint">※効果には個人差があり、成果を保証するものではありません。</p>
   </div>
 </section>
 
 <!-- METRICS -->
 <section class="metrics">
   <div class="wrap reveal">
-    <div class="sec-head"><h2>VISIONSが選ばれる、<br>3つの「0」。</h2></div>
+    <div class="sec-head"><h2><span>VISIONSが選ばれる、</span><span>3つの「0」。</span></h2></div>
     <div class="circles">
       <div class="circle"><div class="v">¥0</div><div class="l">体験レッスン</div></div>
       <div class="circle"><div class="v">¥0</div><div class="l">入会金</div></div>
@@ -584,13 +598,19 @@ fbq('track','PageView');
   </div>
 </footer>
 
-<div class="sticky"><a class="cta line" href="https://lin.ee/Q5ynBlo"><span class="ico">L</span><span class="cta-txt"><b>LINE追加してトレーナーを見てみる</b><small>体験無料・全トレーナー1回ずつ無料で体験できる</small></span></a></div>
+<div class="sticky" id="stickyCta"><div class="sticky-inner"><p class="sticky-caption">無料体験から、LINEで相談</p><a class="cta line" href="https://lin.ee/Q5ynBlo"><span class="ico">L</span><span class="cta-txt"><b>LINE追加してトレーナーを見てみる</b><small>体験無料・全トレーナー1回ずつ無料で体験できる</small></span></a></div></div>
 
 <script>
   const STATIC=location.search.includes('static')||matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
   if(STATIC){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));}
   const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const stickyCta=document.getElementById('stickyCta');
+  const heroCta=document.getElementById('heroCta');
+  if(stickyCta&&heroCta){
+    new IntersectionObserver(entries=>stickyCta.classList.toggle('is-visible',!entries[0].isIntersecting),{threshold:.08}).observe(heroCta);
+  }
   const cards=[...document.querySelectorAll('#picker .tcard')];
   const caps=['RYOを指名 — ダイエット特化','MIKAを指名 — 産後・姿勢','KENを指名 — ボディメイク'];
   const heroImgs=['img/tr-ryo-card.jpg','img/tr-mika-card.jpg','img/tr-ken-card.jpg'];
