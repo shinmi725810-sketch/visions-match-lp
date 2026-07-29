@@ -71,7 +71,7 @@ fbq('track','PageView');
   h2 .sub{display:block;font-size:.9rem;letter-spacing:0;color:var(--ink-dim);font-weight:600;margin-top:12px;line-height:1.7}
   .sec-head{text-align:center;margin-bottom:12px}
   p{color:var(--ink-dim)}
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .54s var(--ease),transform .54s var(--ease)}
   .reveal.in{opacity:1;transform:none}
   /* photo placeholder look */
   .photo{background:linear-gradient(135deg,var(--teal-soft),#D2F0F0);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--teal-d);font-size:.74rem;font-weight:700;gap:4px}
@@ -88,13 +88,23 @@ fbq('track','PageView');
   .nav-cta:hover{transform:translateY(-1px);box-shadow:0 9px 20px -5px rgba(255,122,89,.65)}
 
   /* HERO */
-  .hero{background:linear-gradient(170deg,var(--teal-bg),#fff 70%);padding:20px 0 34px;position:relative;overflow:hidden}
+  .hero{background:linear-gradient(120deg,var(--teal-bg) 0%,#fff 58%,#effafa 100%);padding:20px 0 34px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;width:42vw;height:42vw;right:-17vw;top:-21vw;border:1px solid rgba(34,194,199,.2);border-radius:50%;box-shadow:0 0 0 34px rgba(34,194,199,.045),0 0 0 68px rgba(34,194,199,.025);pointer-events:none}
+  .hero-grid{position:relative;z-index:1}
   .hero .badge-no1{display:inline-flex;align-items:center;gap:7px;background:#fff;border:2px solid var(--teal);color:var(--teal-d);font-weight:800;font-size:.76rem;padding:6px 14px 6px 8px;border-radius:999px;box-shadow:var(--shadow-sm)}
   .hero .badge-no1 .r{background:var(--coral);color:#fff;border-radius:999px;font-size:.7rem;padding:2px 9px;font-family:var(--num);font-weight:800}
   .hero h1{font-size:clamp(1.9rem,8vw,2.9rem);line-height:1.24;font-weight:900;color:var(--navy);margin-top:14px;letter-spacing:.01em;font-feature-settings:"palt"}
   .hero h1 .em{color:var(--teal-d)}
   .hero h1 .mark{background:linear-gradient(transparent 60%,var(--yellow) 60%);padding:0 .1em}
   .hero .lead{font-size:clamp(.95rem,3.6vw,1.06rem);color:var(--ink);margin:12px 0 0;font-weight:600;line-height:1.75}
+  .campaign{position:relative;isolation:isolate;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;margin-top:16px;padding:13px 15px 12px;border:1px solid rgba(255,122,89,.28);border-radius:var(--r-lg);background:rgba(255,255,255,.78);box-shadow:var(--shadow-sm);overflow:hidden}
+  .campaign::before{content:"";position:absolute;inset:auto -25px -43px auto;width:110px;height:110px;background:var(--coral-soft);border-radius:50%;z-index:-1}
+  .campaign .campaign-label{grid-column:1/-1;color:var(--coral-d);font-size:.7rem;font-weight:900;letter-spacing:.1em}
+  .campaign .campaign-price{font-family:var(--num);font-weight:800;color:var(--coral-d);line-height:.95;letter-spacing:-.06em;font-size:clamp(2.05rem,9vw,2.8rem);white-space:nowrap}
+  .campaign .campaign-price small{font-family:var(--sans);font-size:.38em;letter-spacing:0;font-weight:800;margin-right:4px;vertical-align:middle}
+  .campaign .campaign-meta{font-size:.72rem;font-weight:700;color:var(--ink-dim);line-height:1.55}
+  .campaign .campaign-meta s{color:var(--ink-faint);font-family:var(--num);font-size:.92rem}
+  .campaign .campaign-condition{grid-column:1/-1;padding-top:5px;border-top:1px solid var(--border);font-size:.68rem;color:var(--ink-dim);font-weight:700;line-height:1.5}
   .hero-stage{position:relative;margin-top:14px;border-radius:var(--r-xl);overflow:hidden;aspect-ratio:478/996;max-width:312px;margin-left:auto;margin-right:auto;background:#fff;box-shadow:var(--shadow)}
   .hero-stage .photo{height:100%}
   .hero-stage img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:opacity .3s ease}
@@ -280,12 +290,19 @@ fbq('track','PageView');
   .final{background:linear-gradient(170deg,var(--teal-bg),#fff)}
   .final .guarantee{display:inline-flex;align-items:center;gap:7px;background:#fff;border:2px solid var(--teal);color:var(--teal-d);font-weight:800;font-size:.84rem;padding:8px 17px;border-radius:999px;margin-top:16px;box-shadow:var(--shadow-sm)}
 
-  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:120;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -8px 24px -16px rgba(23,58,87,.45)}
-  .sticky .cta{margin-top:0;padding:14px 20px;font-size:.96rem;animation:pulse 2.6s infinite}
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:120;background:rgba(23,58,87,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.13);padding:8px 14px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -12px 32px -22px rgba(23,58,87,.75)}
+  .sticky::before{content:"無料体験から、LINEで相談";display:block;max-width:520px;margin:0 auto 4px;color:rgba(255,255,255,.72);font-size:.63rem;font-weight:700;letter-spacing:.06em;text-align:center}
+  .sticky .cta{margin-top:0;padding:11px 20px;font-size:.9rem;min-height:48px;animation:pulse 2.6s infinite}
+  .reveal .pain li,.reveal .circle,.reveal .tperson,.reveal .rev{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
+  .reveal.in .pain li,.reveal.in .circle,.reveal.in .tperson,.reveal.in .rev{opacity:1;transform:none}
+  .reveal.in .pain li:nth-child(2),.reveal.in .circle:nth-child(2),.reveal.in .tperson:nth-child(2),.reveal.in .rev:nth-child(2){transition-delay:.06s}
+  .reveal.in .pain li:nth-child(3),.reveal.in .circle:nth-child(3),.reveal.in .tperson:nth-child(3),.reveal.in .rev:nth-child(3){transition-delay:.12s}
+  .reveal.in .pain li:nth-child(4),.reveal.in .rev:nth-child(4){transition-delay:.18s}
   @keyframes pulse{0%,100%{box-shadow:0 14px 32px -10px rgba(6,199,85,.55)}50%{box-shadow:0 14px 38px -6px rgba(6,199,85,.8)}}
 
   @media(prefers-reduced-motion:reduce){
     .sticky .cta{animation:none}
+    .reveal,.reveal .pain li,.reveal .circle,.reveal .tperson,.reveal .rev{transition:none}
     html{scroll-behavior:auto}
   }
   @media(max-width:560px){
@@ -299,6 +316,47 @@ fbq('track','PageView');
     .about .row .photo{flex-basis:96px;height:96px}
     .about .row .big{font-size:1.02rem}
   }
+  /* desktop editorial layout and varied section rhythm */
+  @media(min-width:900px){
+    body{padding-bottom:76px}
+    .wrap{max-width:1160px;padding:0 32px}
+    section{padding:clamp(74px,7.5vw,116px) 0}
+    .topstrip{padding:7px 16px}
+    nav{padding:13px max(32px,calc((100vw - 1096px)/2));}
+    .hero{padding:34px 0 30px;min-height:590px}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(370px,.97fr);gap:clamp(38px,6vw,88px);align-items:center;max-width:1096px;margin:0 auto}
+    .hero-copy{max-width:560px}
+    .hero h1{font-size:clamp(3rem,4.35vw,4.25rem);line-height:1.15;margin-top:18px}
+    .hero .lead{font-size:1.03rem;max-width:510px;margin-top:16px}
+    .campaign{max-width:480px;margin-top:20px;padding:15px 17px}
+    .campaign .campaign-price{font-size:3.3rem}
+    .hero .cta-row{text-align:left}
+    .hero .cta{max-width:460px;margin-top:16px}
+    .hero-visual{position:relative;display:grid;grid-template-columns:205px 1fr;align-items:end;gap:14px;padding:10px 0 5px}
+    .hero-stage{grid-row:1;grid-column:1;margin:0;width:205px;max-width:none;height:390px;aspect-ratio:auto;border-radius:20px;transform:rotate(-2.2deg);box-shadow:0 24px 52px -28px rgba(23,58,87,.6)}
+    .hero-stage img{object-fit:cover;object-position:center top}
+    .hero-stage .zero{width:72px;height:72px;left:-9px;top:12px}
+    .hero-stage .zero b{font-size:1.5rem}
+    .picker{grid-row:1;grid-column:2;margin:0 0 16px;max-width:none;padding:12px;border-radius:16px;transform:translateX(-14px);box-shadow:0 18px 36px -25px rgba(23,58,87,.45)}
+    .picker .top{font-size:.68rem;padding-bottom:8px;margin-bottom:8px}
+    .tcards{grid-template-columns:1fr;gap:6px}
+    .tcard{display:grid;grid-template-columns:32px 1fr;column-gap:7px;text-align:left;padding:7px 8px;align-items:center;border-width:1px;border-radius:10px}
+    .tcard .av{grid-row:1/3;width:32px;height:32px;margin:0}
+    .tcard .nm{font-size:.72rem;line-height:1.1}.tcard .sp{font-size:.61rem;line-height:1.1}
+    .tcard .chk{top:50%;right:6px;transform:translateY(-50%) scale(.4)}.tcard.active .chk{transform:translateY(-50%) scale(1)}
+    .picker .cap{font-size:.68rem;margin-top:8px}
+    .ba-peek{padding-top:54px}.ba-peek .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:52px;align-items:center}.ba-peek .sec-head{text-align:left}.ba-peek h2{text-align:left;font-size:clamp(2.1rem,3.2vw,3.2rem)}.ba-peek .ba-grid{margin:0;max-width:none}.ba-peek .fineprint{grid-column:2;margin-top:-36px}
+    .metrics{text-align:left;overflow:hidden}.metrics .wrap{display:grid;grid-template-columns:.76fr 1.24fr;gap:70px;align-items:center}.metrics .sec-head{text-align:left}.metrics h2{text-align:left;font-size:clamp(2.2rem,3.4vw,3.35rem)}.circles{margin:0;gap:0;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.18);border-radius:var(--r-xl);overflow:hidden}.circle{border-radius:0;padding:30px 14px;background:rgba(255,255,255,.96)}.circle:nth-child(2){background:var(--yellow);box-shadow:0 20px 32px -20px rgba(10,50,55,.65)}.reveal.in .circle:nth-child(2){transform:translateY(-13px)}.circle .v{font-size:2.35rem}.circle:nth-child(2) .v{color:var(--navy)}
+    .about .wrap{display:grid;grid-template-columns:1fr 1.5fr;gap:58px;align-items:center}.about .sec-head{text-align:left}.about h2{text-align:left;font-size:clamp(2.15rem,3vw,3rem)}.about .row{margin:0;padding:26px}.about .row .photo{flex-basis:145px;height:145px}
+    .pain{grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}.pain li{border-style:solid;border-width:1px;border-radius:0;padding:20px 18px;box-shadow:0 12px 28px -25px rgba(23,58,87,.35)}.pain li:nth-child(2),.pain li:nth-child(3){transform:translateY(24px)}.pain li:nth-child(3){background:var(--coral-soft);border-color:#ffd4c7}.pain li:nth-child(4){background:var(--teal-soft);border-color:#c6eeee}.solve{max-width:620px;margin:56px auto 0;border-radius:4px}
+    .reasons{grid-template-columns:1fr}.reasons-img{max-width:740px;margin:28px auto 0;display:block}.reason{max-width:640px;margin:auto}.zerobanner{max-width:700px;margin:34px auto 0;border-radius:4px}
+    .trainers .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}.trainers .sec-head{text-align:left}.trainers h2{text-align:left;font-size:clamp(2.2rem,3vw,3.05rem)}.trainers .reasons-img{margin:0;max-width:none}.trainers .note-c{grid-column:2;margin-top:-40px;text-align:right}
+    .voice .sec-head{max-width:620px;margin:0 auto 24px}.voice h2{font-size:clamp(2.25rem,3.2vw,3.2rem)}.reviews{column-count:3;column-gap:18px}
+    .tbl{font-size:.92rem}.tbl th,.tbl td{padding:16px 12px}
+    .cost-bars{max-width:820px;margin:34px auto 0}.cost-row .bar{height:38px}
+  }
+  @media(min-width:900px) and (max-height:760px){.hero{min-height:0;padding:20px 0}.hero-stage{height:330px}.hero h1{font-size:3.1rem}.hero .lead{font-size:.95rem}.campaign{margin-top:12px;padding:10px 14px}.campaign .campaign-price{font-size:2.65rem}.hero .cta{margin-top:10px;padding:13px 20px}.picker{margin-bottom:4px}}
+  @media(max-width:899px){.hero-copy .cta-row{margin-top:0}.hero-visual{margin-top:14px}.campaign{max-width:420px}.hero .cta{margin-top:18px}}
 </style>
 </head>
 <body>
@@ -312,28 +370,37 @@ fbq('track','PageView');
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <span class="badge-no1 reveal"><span class="r">無料</span>全トレーナーを1回ずつ無料で体験できる</span>
-    <h1 class="reveal">トレーナーは、<br><span class="mark em">あなたが選ぶ。</span></h1>
-    <p class="lead reveal">合わない人に当たって、もう挫折しない。移動0分・LINE完結・自宅で30分の、伴走型オンラインパーソナル。</p>
-
-    <div class="hero-stage reveal">
-      <img id="heroTrainer" src="img/tr-ryo-card.jpg" alt="トレーナー RYO（ダイエット）" />
-      <div class="zero"><b>無料</b><span>体験レッスン</span></div>
-    </div>
-
-    <div class="picker reveal" id="picker">
-      <div class="top"><span><span class="dot"></span>今日のトレーナーを選ぶ</span><span>指名料 ¥0</span></div>
-      <div class="tcards">
-        <div class="tcard" data-i="0"><div class="chk">✓</div><div class="av"><img src="img/tr-ryo.jpg" alt="RYO" /></div><div class="nm">RYO</div><div class="sp">ダイエット</div></div>
-        <div class="tcard" data-i="1"><div class="chk">✓</div><div class="av"><img src="img/tr-mika.jpg" alt="MIKA" /></div><div class="nm">MIKA</div><div class="sp">産後・姿勢</div></div>
-        <div class="tcard" data-i="2"><div class="chk">✓</div><div class="av"><img src="img/tr-ken.jpg" alt="KEN" /></div><div class="nm">KEN</div><div class="sp">ボディメイク</div></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="badge-no1 reveal"><span class="r">無料</span>全トレーナーを1回ずつ無料で体験できる</span>
+        <h1 class="reveal">トレーナーは、<br><span class="mark em">あなたが選ぶ。</span></h1>
+        <p class="lead reveal">合わない人に当たって、もう挫折しない。移動0分・LINE完結・自宅で30分の、伴走型オンラインパーソナル。</p>
+        <aside class="campaign reveal" aria-label="オープン記念キャンペーン価格">
+          <div class="campaign-label">オープン記念</div>
+          <div class="campaign-price"><small>1回あたり</small>¥1,500</div>
+          <div class="campaign-meta"><s>通常 ¥3,000</s><br>30分・食事サポート付き</div>
+          <div class="campaign-condition">期間限定（〜2026年8月31日 / 先着30名・いずれか早い方）</div>
+        </aside>
+        <div class="cta-row reveal">
+          <a class="cta line" href="https://lin.ee/Q5ynBlo"><span class="ico">L</span><span class="cta-txt"><b>LINE追加してトレーナーを見てみる</b><small>体験無料・全トレーナー1回ずつ無料で体験できる</small></span></a>
+          <p class="cta-sub">全トレーナーを1人1回ずつ無料で体験できます</p>
+        </div>
       </div>
-      <div class="cap" id="pickcap">合う人を、毎回あなたが指名できる</div>
-    </div>
-
-    <div class="cta-row reveal">
-      <a class="cta line" href="https://lin.ee/Q5ynBlo"><span class="ico">L</span><span class="cta-txt"><b>LINE追加してトレーナーを見てみる</b><small>体験無料・全トレーナー1回ずつ無料で体験できる</small></span></a>
-      <p class="cta-sub">全トレーナーを1人1回ずつ無料で体験できます</p>
+      <div class="hero-visual">
+        <div class="hero-stage reveal">
+          <img id="heroTrainer" src="img/tr-ryo-card.jpg" alt="トレーナー RYO（ダイエット）" width="478" height="996" loading="eager" fetchpriority="high" />
+          <div class="zero"><b>無料</b><span>体験レッスン</span></div>
+        </div>
+        <div class="picker reveal" id="picker">
+          <div class="top"><span><span class="dot"></span>今日のトレーナーを選ぶ</span><span>指名料 ¥0</span></div>
+          <div class="tcards">
+            <div class="tcard" data-i="0"><div class="chk">✓</div><div class="av"><img src="img/tr-ryo.jpg" alt="RYO" width="455" height="620" loading="lazy" /></div><div class="nm">RYO</div><div class="sp">ダイエット</div></div>
+            <div class="tcard" data-i="1"><div class="chk">✓</div><div class="av"><img src="img/tr-mika.jpg" alt="MIKA" width="455" height="620" loading="lazy" /></div><div class="nm">MIKA</div><div class="sp">産後・姿勢</div></div>
+            <div class="tcard" data-i="2"><div class="chk">✓</div><div class="av"><img src="img/tr-ken.jpg" alt="KEN" width="455" height="620" loading="lazy" /></div><div class="nm">KEN</div><div class="sp">ボディメイク</div></div>
+          </div>
+          <div class="cap" id="pickcap">合う人を、毎回あなたが指名できる</div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -343,7 +410,7 @@ fbq('track','PageView');
   <div class="wrap reveal">
     <div class="sec-head"><div class="eyebrow">Results</div><h2>理想のカラダを<br>手に入れた方々。</h2></div>
     <div class="ba-grid">
-      <div class="ba-card"><div class="ba-full"><img src="img/ba-man.jpg" alt="Before After（男性）自己流から理想の体へ" /></div><div class="ba-meta"><div class="res">自己流 → 理想のカラダへ</div><div class="cmt">継続トレーニング＋食事サポート</div></div></div>
+      <div class="ba-card"><div class="ba-full"><img src="img/ba-man.jpg" alt="Before After（男性）自己流から理想の体へ" width="1164" height="1164" loading="lazy" /></div><div class="ba-meta"><div class="res">自己流 → 理想のカラダへ</div><div class="cmt">継続トレーニング＋食事サポート</div></div></div>
     </div>
     <p class="fineprint">※効果には個人差があり、成果を保証するものではありません。</p>
   </div>
@@ -390,7 +457,7 @@ fbq('track','PageView');
 <section>
   <div class="wrap reveal">
     <div class="sec-head"><div class="eyebrow">5 Reasons</div><h2>VISIONSが選ばれる<br><big>5</big>つの理由</h2></div>
-    <img class="reasons-img" src="img/reasons.png" alt="VISIONSが選ばれる理由：01 トレーナーを毎回・無料で指名／02 移動0分・すべてLINEで／03 自宅30分・スキマ時間でOK／04 食事サポート・食べたものを送るだけ" />
+    <img class="reasons-img" src="img/reasons.png" alt="VISIONSが選ばれる理由：01 トレーナーを毎回・無料で指名／02 移動0分・すべてLINEで／03 自宅30分・スキマ時間でOK／04 食事サポート・食べたものを送るだけ" width="887" height="1452" loading="lazy" />
     <!-- 理由05は正しい料金文言でHTML化（旧画像の「体験プラン¥3,000」表記を排除・景表法対応） -->
     <div class="reasons" style="margin-top:18px">
       <div class="reason">
@@ -410,7 +477,7 @@ fbq('track','PageView');
 <section class="trainers">
   <div class="wrap reveal">
     <div class="sec-head"><div class="eyebrow">Trainers</div><h2>あなたが選べる、<br><span class="hl">トレーナー達。</span><span class="sub">顔・実績を見て、毎回あなたが指名。指名料0円。</span></h2></div>
-    <img class="reasons-img" src="img/trainers.png" alt="VISIONSのトレーナー：RYO（ダイエット）／MIKA（産後・姿勢）／KEN（ボディメイク）。顔・実績を見て毎回あなたが指名できます" />
+    <img class="reasons-img" src="img/trainers.png" alt="VISIONSのトレーナー：RYO（ダイエット）／MIKA（産後・姿勢）／KEN（ボディメイク）。顔・実績を見て毎回あなたが指名できます" width="1536" height="1024" loading="lazy" />
     <p class="note-c">割り当てじゃない。あなたが、選ぶ。</p>
   </div>
 </section>
