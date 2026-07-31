@@ -2090,6 +2090,36 @@
         text-align: left;
       }
     </style>
+  <!-- Google tag (gtag.js) - Google 広告 コンバージョン計測 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17847397045"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17847397045');
+
+    /* LINE CTA のクリックを「LINE友だち追加（無料体験申込）」として計測。
+       外部遷移でビーコンが失われないよう event_callback で待ち、
+       タグが応答しない場合は 800ms で必ず遷移させる（計測より導線を優先）。 */
+    (function () {
+      var SEND_TO = 'AW-17847397045/NFGKCJnQstkcELXVpr5C';
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (!t || typeof t.closest !== 'function') return;
+        var a = t.closest('a[href*="lin.ee"], a[href*="line.me"]');
+        if (!a) return;
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') {
+          gtag('event', 'conversion', { send_to: SEND_TO });
+          return;
+        }
+        e.preventDefault();
+        var moved = false;
+        var go = function () { if (moved) return; moved = true; window.location.href = a.href; };
+        gtag('event', 'conversion', { send_to: SEND_TO, event_callback: go });
+        setTimeout(go, 800);
+      }, true);
+    })();
+  </script>
   </head>
   <body>
     <div class="topstrip">🎁 入会金0円・無理な勧誘なし</div>
