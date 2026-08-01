@@ -446,15 +446,6 @@ fbq('track','PageView');
   </div>
 </section>
 
-<!-- VOICE -->
-<section class="voice">
-  <div class="wrap reveal">
-    <div class="sec-head"><div class="eyebrow">Voice</div><h2>“私でもできた！”<br><span class="cl">ご満足の声、続々。</span></h2></div>
-    <div class="reviews" id="reviews"></div>
-    <p class="fineprint" style="text-align:center;margin-top:16px">※掲載許諾をいただいた体験者の声です。効果・感想には個人差があり、成果を保証するものではありません。</p>
-  </div>
-</section>
-
 <!-- COMPARISON -->
 <section>
   <div class="wrap reveal">
@@ -571,21 +562,6 @@ fbq('track','PageView');
   let timer=setInterval(()=>{idx=(idx+1)%cards.length;sel(idx)},2200);
   cards.forEach((c,i)=>c.addEventListener('click',()=>{idx=i;sel(i);clearInterval(timer);timer=setInterval(()=>{idx=(idx+1)%cards.length;sel(idx)},2200)}));
 
-  /* ===== Google reviews (お客様の声) ===== */
-  const REVIEWS=[
-    {name:"佐々木 めぐみ",date:"2年前",rating:5,initial:"佐",text:"産後太りが戻らないまま2年経ってしまい、鏡を見るのも嫌になっていた時に無料体験を見つけて申し込みました。赤ちゃんがいるのでジムには絶対通えないし、正直オンラインで効果あるの?と疑ってました。\n\n最初はMIKAさんを選んだのですが、産後の骨盤や姿勢のことを本当によく分かってくれていて、子どもが途中で泣いても「抱っこしながらできるメニューに変えましょう」と嫌な顔ひとつせず対応してくれたのが忘れられません。食事も、離乳食の残りを食べちゃった…みたいな写真を送っても責めずに現実的なアドバイスをくれるので続けられました。\n\n4ヶ月でウエスト-6cm、体重も-5kgほど。何より夕方に鏡を見ても落ち込まなくなりました。個人差はあると思いますが、私みたいに家から出られないママにはすごく合ってると思います。MIKAさんには感謝しかないです。"},
-    {name:"Takashi Murata",date:"2年前",rating:5,initial:"T",text:"過去に大手ジムを2回、パーソナルも1回挫折してます。原因は分かってて、担当トレーナーと合わなくても言い出せずフェードアウトするパターン。だからここの「毎回トレーナーを選び直せる」仕組みを見た時、これ自分のためのサービスだなと思いました。\n\n無料体験で3人受けて、普段はRYOさんを指名。理詰めで説明してくれるタイプで自分には合ってました。ただ疲れてる週はあえてゆるめの雰囲気のトレーナーさんに変えたりして、この「逃げ場がある感じ」が精神的にすごく楽です。指名料もかからないし。\n\n在宅勤務で完全に運動不足だった身体が、3ヶ月で体重-7kg、体脂肪率-5%くらい。夜22時の枠があるのも大きい。LINEで飯の写真送るだけの食事管理も、ズボラな自分でもギリギリ続いてます。もちろん人によると思いますが、ジムに挫折した経験がある人ほど試す価値あると思う。"},
-    {name:"伊藤 さやか",date:"2年前",rating:5,initial:"伊",text:"在宅ワークで完全に運動不足でしたが、自宅で30分・機材なしなので昼休みにできるのが本当に助かってます。予約から食事報告まで全部LINEで完結するので、専用アプリを開く手間すらないのがズボラな私向きでした。2ヶ月で体が軽くなって、階段で息切れしなくなったのが地味に嬉しいです。"},
-    {name:"nao",date:"1年前",rating:5,initial:"n",text:"トレーナーを毎回自分で選べるのが良いです。最初KENさんのボディメイクでやってたけど、途中で減量に切り替えたくてRYOさんに変更。普通のパーソナルだと担当変更って言い出しにくいけど、ここは仕組み上それが当たり前なので気まずさゼロ。3ヶ月で-6kg、スーツのベルト穴が2つ変わりました。"},
-    {name:"Yumiko Kondo",date:"2年前",rating:4,initial:"Y",text:"食事サポートが想像以上でした。コンビニ飯の写真を送っても「これなら◯◯に変えるだけでOK」と現実的な返信が来るので挫折しない。2ヶ月でウエスト-4cm。効果には満足ですが、人気トレーナーさんの夜の枠はすぐ埋まるので、そこの枠数はもう少し増やしてほしいなというのが正直なところ。それ以外は文句なしです。"},
-    {name:"もちこ食堂",date:"2年前",rating:5,initial:"も",text:"産後ママです。MIKAさんの指導が丁寧で、授乳中でもできるメニューを組んでくれました。子どもの昼寝時間に合わせて予約できるのが神。夜中にLINEで弱音を送ってしまった時も翌朝ちゃんと励ましの返信が来て泣きました😂 半年でだいぶ体型戻ってきた気がします。"},
-    {name:"田中 浩二",date:"半年前",rating:5,initial:"田",text:"40代、運動歴ほぼゼロ。最初の1回¥3,000で試せたので気軽に始められた。30分って短いと思ってたけど、終わる頃には汗だくです。"},
-    {name:"Kenta S",date:"2年前",rating:5,initial:"K",text:"仕事が不規則でジムは無理でしたが、夜遅い時間でも予約できて助かってます。LINEだけで全部済むのが楽。2ヶ月で-4kgでした。"},
-    {name:"山本 千夏",date:"3ヶ月前",rating:5,initial:"山",text:"食べたものを送るとすぐ返事が来るので、間食が自然と減りました。監視されてる感じじゃなくて味方がいる感じ。続いてます。"},
-    {name:"ゆるトレ主婦",date:"2年前",rating:5,initial:"ゆ",text:"入会金0円と指名料0円につられて始めたけど正解でした。気分でトレーナー変えられるの、飽き性の私にちょうどいい🙆‍♀️"},
-    {name:"Mari Okada",date:"1年前",rating:5,initial:"M",text:"機材なし・部屋着のままでOKなのが最高。化粧しなくていいオンラインだから続いてる気がします。ウエスト-5cmいきました。"}
-  ];
-  const AV_COLORS=['#EA4335','#4285F4','#34A853','#F9AB00','#A142F4','#00ACC1','#FF7043','#5C6BC0','#26A69A','#EC407A','#7E57C2','#66BB6A'];
   /* ===== 計測: LINE友だち追加クリックを Meta Pixel の Lead として送信 ===== */
   document.querySelectorAll('a[href^="https://lin.ee/"]').forEach(a=>{
     a.addEventListener('click',()=>{ try{ if(typeof fbq==='function') fbq('track','Lead',{content_name:'LINE友だち追加'}); }catch(e){} });
@@ -593,18 +569,6 @@ fbq('track','PageView');
   /* フッターの年号を自動更新 */
   (function(){var fy=document.getElementById('fy'); if(fy) fy.textContent=new Date().getFullYear();})();
 
-  const esc=s=>s.replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
-  const rvEl=document.getElementById('reviews');
-  if(rvEl){
-    rvEl.innerHTML=REVIEWS.map((r,i)=>`<div class="rev"><div class="rev-head"><div class="rev-av" style="background:${AV_COLORS[i%AV_COLORS.length]}">${esc(r.initial)}</div><div class="rev-meta"><div class="rev-name">${esc(r.name)}</div><div class="rev-date">体験者の声</div></div></div><div class="rev-stars"><span style="color:#FBBC04">${'★'.repeat(r.rating)}</span><span style="color:#dadce0">${'☆'.repeat(5-r.rating)}</span></div><div class="rev-text clamp">${esc(r.text)}</div><button class="rev-more" type="button" style="display:none">続きを読む</button></div>`).join('');
-    rvEl.querySelectorAll('.rev').forEach(card=>{
-      const txt=card.querySelector('.rev-text'), btn=card.querySelector('.rev-more');
-      if(txt.scrollHeight>txt.clientHeight+2){
-        btn.style.display='inline-block';
-        btn.addEventListener('click',()=>{const clamped=txt.classList.toggle('clamp');btn.textContent=clamped?'続きを読む':'隠す';});
-      }
-    });
-  }
 </script>
 </body>
 </html>
