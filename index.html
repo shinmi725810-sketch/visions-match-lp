@@ -10,10 +10,7 @@
     />
 
     <!-- Canonical -->
-    <link
-      rel="canonical"
-      href="https://visions.goodwillhunting.co.jp/"
-    />
+    <link rel="canonical" href="https://visions.goodwillhunting.co.jp/" />
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -28,10 +25,7 @@
       property="og:description"
       content="トレーナーを毎回あなたが指名できる、LINE完結の自宅オンラインパーソナル。体験無料・入会金0円・無理な勧誘なし。"
     />
-    <meta
-      property="og:url"
-      content="https://visions.goodwillhunting.co.jp/"
-    />
+    <meta property="og:url" content="https://visions.goodwillhunting.co.jp/" />
     <meta
       property="og:image"
       content="https://visions.goodwillhunting.co.jp/og-image.png"
@@ -92,7 +86,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Manrope:wght@700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@600&family=Manrope:wght@700;800&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -122,6 +116,15 @@
         --ease: cubic-bezier(0.16, 1, 0.3, 1);
         --sans: "Noto Sans JP", sans-serif;
         --num: "Manrope", sans-serif;
+        /* Manrope に和字がないため、日本語表示名のトレーナー用にフォールバックを繋ぐ */
+        --name: "Manrope", "Noto Sans JP", sans-serif;
+        /* 最上部バナー専用の明朝。webfont が来る前は OS の明朝で持たせる */
+        --mincho:
+          "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif;
+        --gold: #b8944d;
+        --gold-l: #d9be82;
+        --gold-d: #96762f;
+        --ink-black: #1c1c1c;
       }
       * {
         box-sizing: border-box;
@@ -449,17 +452,96 @@
         margin-right: auto;
         background: #fff;
         box-shadow: var(--shadow);
+        container-type: inline-size;
+        display: flex;
+        flex-direction: column;
       }
-      .hero-stage .photo {
-        height: 100%;
+      .hs-photo {
+        flex: 0 0 62.3%;
+        position: relative;
+        background: var(--teal-soft);
+        overflow: hidden;
       }
-      .hero-stage img {
+      .hs-photo img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        object-position: center;
+        object-fit: cover;
+        object-position: center 16%;
         display: block;
-        transition: opacity 0.3s ease;
+      }
+      .hs-photo img,
+      .hs-body {
+        transition: opacity 0.22s ease;
+      }
+      .hero-stage.is-swapping .hs-photo img,
+      .hero-stage.is-swapping .hs-body {
+        opacity: 0;
+      }
+      /* 文字サイズはカード幅（cqw）基準。ベタ焼き画像と同じように拡縮する */
+      .hs-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.6cqw;
+        padding: 3cqw 4cqw 4.5cqw;
+        text-align: center;
+      }
+      .hs-name {
+        font-family: var(--name);
+        font-weight: 800;
+        color: var(--navy);
+        font-size: 10.5cqw;
+        line-height: 1.05;
+        letter-spacing: 0.01em;
+      }
+      .hs-spec {
+        color: var(--teal-d);
+        font-weight: 800;
+        font-size: 6cqw;
+        line-height: 1.2;
+      }
+      .hs-copy {
+        color: var(--ink-dim);
+        font-size: 4.4cqw;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+      .hs-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.6cqw;
+        margin-top: 0.8cqw;
+      }
+      .hs-tags span {
+        border: 1px solid var(--teal);
+        color: var(--teal-d);
+        border-radius: 999px;
+        padding: 1.2cqw 2.8cqw;
+        font-size: 3.5cqw;
+        font-weight: 700;
+        line-height: 1.4;
+        white-space: nowrap;
+      }
+      .hs-check {
+        position: absolute;
+        right: 4cqw;
+        top: 4cqw;
+        width: 11cqw;
+        height: 11cqw;
+        border-radius: 50%;
+        background: var(--coral);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5.6cqw;
+        font-weight: 900;
+        z-index: 2;
+        box-shadow: 0 6px 14px -4px rgba(255, 122, 89, 0.7);
       }
       .tcard .av {
         overflow: hidden;
@@ -510,6 +592,346 @@
       .hero-stage .zero span {
         font-size: 0.68rem;
         font-weight: 700;
+      }
+
+      /* ===== 最上部ブランドバナー（ゴールド×明朝） =====
+         この帯だけ他セクションと系統が違うので、色・書体はここに閉じる */
+      .premier {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            120% 90% at 88% 8%,
+            #fdf1f0 0%,
+            rgba(253, 241, 240, 0) 58%
+          ),
+          linear-gradient(170deg, #fffdf9 0%, #fbf7ef 62%, #f6efe2 100%);
+        padding: 0 0 clamp(20px, 3vw, 34px);
+        border-bottom: 1px solid rgba(184, 148, 77, 0.22);
+      }
+      /* 左上の黒い斜めシェイプ＋ロゴ */
+      .premier-mark {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        padding: 14px clamp(38px, 5vw, 62px) 16px clamp(16px, 4vw, 40px);
+        background: linear-gradient(120deg, #141414 0%, #2b2825 100%);
+        clip-path: polygon(0 0, 100% 0, calc(100% - 30px) 100%, 0 100%);
+        color: #fff;
+      }
+      .premier-mark svg {
+        width: 30px;
+        height: 30px;
+        flex: none;
+      }
+      .pm-name {
+        font-family: var(--num);
+        font-weight: 800;
+        font-size: 1.06rem;
+        letter-spacing: 0.16em;
+        line-height: 1;
+        background: linear-gradient(
+          100deg,
+          var(--gold-l),
+          #fff2d2,
+          var(--gold)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .pm-sub {
+        font-family: var(--num);
+        font-size: 0.5rem;
+        letter-spacing: 0.3em;
+        color: #cbbda0;
+        line-height: 1;
+        margin-top: 5px;
+      }
+      .pm-lock {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .premier-grid {
+        display: grid;
+        gap: clamp(18px, 3vw, 30px);
+        padding-top: clamp(18px, 2.6vw, 30px);
+      }
+      .premier-title {
+        font-family: var(--mincho);
+        font-weight: 600;
+        color: var(--ink-black);
+        font-size: clamp(1.92rem, 7.4vw, 3.5rem);
+        line-height: 1.34;
+        letter-spacing: 0.01em;
+      }
+      .premier-title .g {
+        background: linear-gradient(
+          96deg,
+          var(--gold-d) 0%,
+          var(--gold) 45%,
+          var(--gold-l) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      /* background-clip:text が効かない環境では transparent のまま文字が消えるので戻す */
+      @supports not (
+        (-webkit-background-clip: text) or (background-clip: text)
+      ) {
+        .premier-title .g,
+        .pm-name {
+          background: none;
+          color: var(--gold-d);
+        }
+        .pm-name {
+          color: var(--gold-l);
+        }
+      }
+      .premier-lead {
+        margin-top: 14px;
+        font-size: clamp(0.86rem, 2.5vw, 1rem);
+        line-height: 2;
+        color: #4a463f;
+        font-weight: 500;
+      }
+      .premier-lead .u {
+        border-bottom: 2px solid var(--gold-l);
+        padding-bottom: 1px;
+      }
+
+      /* 3つの訴求（丸バッジ＋説明） */
+      .premier-feats {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(8px, 1.8vw, 20px);
+        margin-top: clamp(18px, 2.6vw, 28px);
+      }
+      .premier-feats li {
+        text-align: center;
+      }
+      .pf-badge {
+        width: clamp(78px, 21vw, 116px);
+        height: clamp(78px, 21vw, 116px);
+        margin: 0 auto;
+        border-radius: 50%;
+        background: linear-gradient(160deg, #fff 0%, #f4ece0 100%);
+        border: 1px solid rgba(184, 148, 77, 0.42);
+        box-shadow: 0 12px 26px -16px rgba(120, 92, 40, 0.55);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      .pf-badge svg {
+        width: clamp(21px, 5.4vw, 30px);
+        height: clamp(21px, 5.4vw, 30px);
+        stroke: var(--gold-d);
+        fill: none;
+        stroke-width: 1.6;
+      }
+      .pf-badge b {
+        font-size: clamp(0.6rem, 1.9vw, 0.78rem);
+        font-weight: 800;
+        color: #6b5423;
+        line-height: 1.25;
+      }
+      .premier-feats small {
+        display: block;
+        margin-top: 9px;
+        font-size: clamp(0.6rem, 1.75vw, 0.72rem);
+        line-height: 1.75;
+        color: #6d675d;
+      }
+
+      /* 右のビジュアル：ビフォーアフター＋オンライン受講カット */
+      .premier-visual {
+        position: relative;
+        /* 1カラム時に写真が画面幅いっぱいまで伸びると、ヒーローが 1.5 画面ぶん下がる */
+        max-width: 480px;
+        margin-inline: auto;
+      }
+      .pv-ba {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: var(--r-lg);
+        box-shadow: 0 26px 54px -30px rgba(90, 62, 30, 0.5);
+      }
+      .pv-session {
+        position: relative;
+        margin: -14% 0 0 auto;
+        width: 62%;
+        border-radius: var(--r-md);
+        overflow: hidden;
+        border: 3px solid #fff;
+        box-shadow: 0 22px 44px -22px rgba(60, 45, 20, 0.55);
+      }
+      .pv-session img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      /* .pv-session は角丸のため overflow:hidden。バッジはその外側に出す */
+      .pv-badge {
+        position: absolute;
+        right: 2%;
+        bottom: -14px;
+        z-index: 2;
+        /* 白文字が AA を満たす濃さ。--gold-l まで明るくすると 1.8:1 まで落ちる */
+        background: linear-gradient(140deg, #6b5320, #8d6f31);
+        color: #fff;
+        font-size: clamp(0.56rem, 1.6vw, 0.68rem);
+        font-weight: 700;
+        line-height: 1.5;
+        padding: 8px 12px;
+        border-radius: 999px;
+        text-align: center;
+        box-shadow: 0 10px 22px -10px rgba(120, 92, 40, 0.8);
+      }
+      .pv-badge b {
+        font-weight: 900;
+      }
+
+      /* 体験までの流れ（バナー最下部の帯） */
+      .flow {
+        background: #fdfaf4;
+        border-top: 1px solid rgba(184, 148, 77, 0.28);
+        padding: clamp(16px, 2.4vw, 22px) 0;
+      }
+      .flow-inner {
+        display: grid;
+        gap: clamp(12px, 2vw, 22px);
+        align-items: center;
+      }
+      .flow-label {
+        justify-self: center;
+        width: clamp(84px, 22vw, 104px);
+        height: clamp(84px, 22vw, 104px);
+        border-radius: 50%;
+        border: 1px solid rgba(184, 148, 77, 0.55);
+        background: #fff;
+        color: var(--gold-d);
+        font-family: var(--mincho);
+        font-weight: 600;
+        font-size: clamp(0.72rem, 2.2vw, 0.84rem);
+        line-height: 1.5;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+      }
+      .flow-steps {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        max-width: 340px;
+        margin-inline: auto;
+      }
+      .flow-steps li {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 9px;
+        align-items: center;
+      }
+      .fs-ic {
+        width: clamp(34px, 9vw, 42px);
+        height: clamp(34px, 9vw, 42px);
+        border-radius: var(--r-sm);
+        border: 1px solid rgba(184, 148, 77, 0.45);
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+      }
+      .fs-ic svg {
+        width: 54%;
+        height: 54%;
+        stroke: var(--gold-d);
+        fill: none;
+        stroke-width: 1.7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .flow-steps b {
+        display: block;
+        font-size: clamp(0.75rem, 2.2vw, 0.88rem);
+        font-weight: 800;
+        color: #4a3c1c;
+        line-height: 1.35;
+      }
+      .flow-steps small {
+        display: block;
+        font-size: clamp(0.62rem, 1.85vw, 0.7rem);
+        line-height: 1.6;
+        color: #7a7264;
+        margin-top: 2px;
+      }
+      /* 手順の矢印。折り返す幅では順序が読めなくなるので番号に切り替える */
+      .fs-no {
+        position: absolute;
+        top: -2px;
+        right: 0;
+        font-family: var(--num);
+        font-size: 0.62rem;
+        font-weight: 800;
+        color: rgba(184, 148, 77, 0.7);
+      }
+      .flow-steps li::after {
+        display: none;
+      }
+
+      @media (min-width: 860px) {
+        .flow-inner {
+          grid-template-columns: auto 1fr;
+          gap: clamp(18px, 2.5vw, 30px);
+        }
+        .flow-steps {
+          /* minmax(0,1fr) にしないと min-content で列幅が不揃いになる */
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: clamp(10px, 1.6vw, 20px);
+          max-width: none;
+          margin-inline: 0;
+        }
+        .fs-no {
+          display: none;
+        }
+        /* 各ステップの間にシェブロン */
+        .flow-steps li:not(:last-child)::after {
+          content: "";
+          display: block;
+          position: absolute;
+          right: calc(clamp(10px, 1.6vw, 20px) / -2 - 3px);
+          top: 50%;
+          width: 7px;
+          height: 7px;
+          border-top: 1.6px solid rgba(184, 148, 77, 0.75);
+          border-right: 1.6px solid rgba(184, 148, 77, 0.75);
+          transform: translateY(-50%) rotate(45deg);
+        }
+      }
+
+      @media (min-width: 860px) {
+        .premier-grid {
+          grid-template-columns: 1.02fr 0.98fr;
+          align-items: center;
+          gap: clamp(28px, 4vw, 56px);
+          padding-block: clamp(26px, 3.4vw, 46px);
+        }
+        .premier-feats {
+          margin-top: clamp(24px, 3vw, 36px);
+        }
+        .premier-visual {
+          max-width: none;
+        }
       }
 
       /* CTA */
@@ -609,11 +1031,15 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 8px;
         font-size: 0.76rem;
         color: var(--ink-faint);
         padding: 0 2px 10px;
         border-bottom: 1px solid var(--border);
         margin-bottom: 11px;
+      }
+      .picker .top > span {
+        white-space: nowrap;
       }
       .picker .top .dot {
         width: 7px;
@@ -630,6 +1056,10 @@
       }
       .tcard {
         position: relative;
+        display: block;
+        width: 100%;
+        font: inherit;
+        color: inherit;
         background: var(--bg2);
         border: 2px solid var(--border);
         border-radius: var(--r-md);
@@ -654,13 +1084,22 @@
         font-size: 1.25rem;
       }
       .tcard .nm {
+        display: block;
+        font-family: var(--name);
         font-size: 0.8rem;
         font-weight: 800;
         color: var(--navy);
+        line-height: 1.3;
       }
       .tcard .sp {
+        display: block;
         font-size: 0.7rem;
         color: var(--ink-faint);
+        line-height: 1.3;
+      }
+      .tcard:focus-visible {
+        outline: 2px solid var(--teal-d);
+        outline-offset: 2px;
       }
       .tcard .chk {
         position: absolute;
@@ -918,11 +1357,18 @@
       .trainers {
         background: var(--bg2);
       }
+      /* 6人なので 1→2→3列。4列だと 4+2 に割れて座りが悪い */
       .tgrid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 11px;
+        grid-template-columns: 1fr;
+        gap: 14px;
         margin-top: 24px;
+        text-align: left;
+      }
+      @media (min-width: 560px) {
+        .tgrid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
       .tperson {
         background: #fff;
@@ -933,7 +1379,8 @@
         transition:
           transform 0.3s var(--ease),
           box-shadow 0.3s var(--ease);
-        text-align: center;
+        display: flex;
+        flex-direction: column;
       }
       .tperson:hover {
         transform: translateY(-4px);
@@ -941,32 +1388,126 @@
       }
       .tperson .tp-photo {
         aspect-ratio: 1/1.05;
+        background: var(--teal-soft);
       }
       .tperson .body {
-        padding: 11px 7px 14px;
+        padding: 15px 16px 18px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
       }
       .tperson .nm {
+        font-family: var(--name);
         font-weight: 800;
         color: var(--navy);
-        font-size: 0.92rem;
+        font-size: 1.24rem;
+        line-height: 1.2;
       }
       .tperson .sp {
         color: var(--teal-d);
-        font-size: 0.74rem;
-        margin: 2px 0;
-        font-weight: 700;
+        font-size: 0.8rem;
+        margin: 3px 0 0;
+        font-weight: 800;
       }
       .tperson .meta {
         font-size: 0.72rem;
         color: var(--ink-faint);
+        line-height: 1.6;
+        margin-top: 4px;
+      }
+      .tp-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+        list-style: none;
+      }
+      .tp-tags li {
+        border: 1px solid var(--border);
+        background: var(--bg2);
+        color: var(--teal-d);
+        border-radius: 999px;
+        padding: 3px 9px;
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
+      .tp-lead {
+        font-size: 0.8rem;
+        line-height: 1.75;
+        color: var(--ink-dim);
+        margin-top: 11px;
+      }
+      /* 全文はアコーディオンに畳む。開かなくても選べる情報量を上に置く */
+      .tp-more {
+        margin-top: auto; /* 文量が違ってもカード下端で揃える */
+        border-top: 1px solid var(--border);
+        padding-top: 12px;
+      }
+      .tp-more > summary {
+        cursor: pointer;
+        list-style: none;
+        font-size: 0.76rem;
+        font-weight: 800;
+        color: var(--teal-d);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .tp-more > summary::-webkit-details-marker {
+        display: none;
+      }
+      .tp-more > summary::after {
+        content: "＋";
+        font-size: 0.9rem;
+        line-height: 1;
+        transition: transform 0.25s var(--ease);
+      }
+      .tp-more[open] > summary::after {
+        content: "−";
+      }
+      .tp-more > summary:focus-visible {
+        outline: 2px solid var(--teal);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .tp-detail {
+        margin-top: 12px;
+      }
+      .tp-detail h4 {
+        font-size: 0.74rem;
+        font-weight: 800;
+        color: var(--navy);
+        margin-top: 13px;
+        padding-left: 9px;
+        border-left: 3px solid var(--teal);
+        line-height: 1.5;
+      }
+      .tp-detail h4:first-child {
+        margin-top: 0;
+      }
+      .tp-detail ul {
+        margin-top: 5px;
+        padding-left: 17px;
+      }
+      .tp-detail li {
+        font-size: 0.75rem;
+        line-height: 1.75;
+        color: var(--ink-dim);
+      }
+      .tp-detail p {
+        font-size: 0.75rem;
+        line-height: 1.85;
+        color: var(--ink-dim);
+        margin-top: 5px;
       }
       .tperson .pick-btn {
-        display: inline-block;
-        margin-top: 8px;
-        font-size: 0.72rem;
+        align-self: flex-start;
+        margin-top: 14px;
+        font-size: 0.74rem;
         color: #fff;
         background: var(--coral);
-        padding: 6px 13px;
+        padding: 8px 16px;
         border-radius: 999px;
         font-weight: 800;
         text-decoration: none;
@@ -977,6 +1518,10 @@
       .tperson .pick-btn:hover {
         background: var(--coral-d);
         transform: translateY(-1px);
+      }
+      .tperson .pick-btn:focus-visible {
+        outline: 2px solid var(--navy);
+        outline-offset: 3px;
       }
       .note-c {
         text-align: center;
@@ -1296,10 +1841,10 @@
       /* before after */
       .ba-grid {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 13px;
         margin: 24px auto 0;
-        max-width: 520px;
+        max-width: 760px;
       }
       .ba-card {
         background: #fff;
@@ -1580,8 +2125,15 @@
         transition-delay: 0.12s;
       }
       .reveal.in .pain li:nth-child(4),
+      .reveal.in .tperson:nth-child(4),
       .reveal.in .rev:nth-child(4) {
         transition-delay: 0.18s;
+      }
+      .reveal.in .tperson:nth-child(5) {
+        transition-delay: 0.24s;
+      }
+      .reveal.in .tperson:nth-child(6) {
+        transition-delay: 0.3s;
       }
       @keyframes pulse {
         0%,
@@ -1751,10 +2303,6 @@
           border-radius: 20px;
           transform: rotate(-2.2deg);
           box-shadow: 0 24px 52px -28px rgba(23, 58, 87, 0.6);
-        }
-        .hero-stage img {
-          object-fit: contain;
-          object-position: center;
         }
         .hero-stage .zero {
           width: 72px;
@@ -1947,27 +2495,17 @@
           margin: 34px auto 0;
           border-radius: 4px;
         }
-        .trainers .wrap {
-          display: grid;
-          grid-template-columns: 0.8fr 1.2fr;
-          gap: 60px;
-          align-items: center;
-        }
-        .trainers .sec-head {
-          text-align: left;
-        }
+        /* 6人分のカードを並べるので、見出しは上に置いてグリッドは全幅を使う */
         .trainers h2 {
-          text-align: left;
           font-size: clamp(2.2rem, 3vw, 3.05rem);
         }
-        .trainers .reasons-img {
-          margin: 0;
-          max-width: none;
+        .tgrid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+          margin-top: 34px;
         }
-        .trainers .note-c {
-          grid-column: 2;
-          margin-top: -40px;
-          text-align: right;
+        .tperson .body {
+          padding: 17px 19px 20px;
         }
         .voice .sec-head {
           max-width: 620px;
@@ -2001,7 +2539,9 @@
           padding: 20px 0;
         }
         .hero-stage {
+          /* 縦の余裕がない画面では、比率を保ったまま縮める（幅を固定すると中の文字が潰れる） */
           height: 330px;
+          width: auto;
         }
         .hero h1 {
           font-size: 3.1rem;
@@ -2090,36 +2630,58 @@
         text-align: left;
       }
     </style>
-  <!-- Google tag (gtag.js) - Google 広告 コンバージョン計測 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17847397045"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-17847397045');
+    <!-- Google tag (gtag.js) - Google 広告 コンバージョン計測 -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-17847397045"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "AW-17847397045");
 
-    /* LINE CTA のクリックを「LINE友だち追加（無料体験申込）」として計測。
+      /* LINE CTA のクリックを「LINE友だち追加（無料体験申込）」として計測。
        外部遷移でビーコンが失われないよう event_callback で待ち、
        タグが応答しない場合は 800ms で必ず遷移させる（計測より導線を優先）。 */
-    (function () {
-      var SEND_TO = 'AW-17847397045/NFGKCJnQstkcELXVpr5C';
-      document.addEventListener('click', function (e) {
-        var t = e.target;
-        if (!t || typeof t.closest !== 'function') return;
-        var a = t.closest('a[href*="lin.ee"], a[href*="line.me"]');
-        if (!a) return;
-        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') {
-          gtag('event', 'conversion', { send_to: SEND_TO });
-          return;
-        }
-        e.preventDefault();
-        var moved = false;
-        var go = function () { if (moved) return; moved = true; window.location.href = a.href; };
-        gtag('event', 'conversion', { send_to: SEND_TO, event_callback: go });
-        setTimeout(go, 800);
-      }, true);
-    })();
-  </script>
+      (function () {
+        var SEND_TO = "AW-17847397045/NFGKCJnQstkcELXVpr5C";
+        document.addEventListener(
+          "click",
+          function (e) {
+            var t = e.target;
+            if (!t || typeof t.closest !== "function") return;
+            var a = t.closest('a[href*="lin.ee"], a[href*="line.me"]');
+            if (!a) return;
+            if (
+              e.button !== 0 ||
+              e.metaKey ||
+              e.ctrlKey ||
+              e.shiftKey ||
+              a.target === "_blank"
+            ) {
+              gtag("event", "conversion", { send_to: SEND_TO });
+              return;
+            }
+            e.preventDefault();
+            var moved = false;
+            var go = function () {
+              if (moved) return;
+              moved = true;
+              window.location.href = a.href;
+            };
+            gtag("event", "conversion", {
+              send_to: SEND_TO,
+              event_callback: go,
+            });
+            setTimeout(go, 800);
+          },
+          true,
+        );
+      })();
+    </script>
   </head>
   <body>
     <div class="topstrip">🎁 入会金0円・無理な勧誘なし</div>
@@ -2129,6 +2691,175 @@
         ><span>LINE</span>で無料体験＆相談</a
       >
     </nav>
+
+    <!-- BRAND BANNER（ヒーローの上・ゴールド×明朝） -->
+    <section class="premier" aria-labelledby="premierTitle">
+      <div class="premier-mark">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="vg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#e6d0a0" />
+              <stop offset="0.5" stop-color="#b8944d" />
+              <stop offset="1" stop-color="#8d6d2a" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M3 6 L16 27 L29 6 L23.5 6 L16 18.6 L8.5 6 Z"
+            fill="url(#vg)"
+          />
+          <path d="M11.5 6 L16 13.4 L20.5 6 Z" fill="url(#vg)" opacity=".55" />
+        </svg>
+        <span class="pm-lock">
+          <span class="pm-name">VISIONS</span>
+          <span class="pm-sub">ONLINE PERSONAL</span>
+        </span>
+      </div>
+
+      <div class="wrap">
+        <div class="premier-grid">
+          <div class="premier-copy">
+            <h2 class="premier-title" id="premierTitle">
+              <span class="g">自宅</span>が、最高の<br /><span class="g"
+                >パーソナルジム</span
+              >に。
+            </h2>
+            <p class="premier-lead">
+              オンラインパーソナルトレーニングで<br /><span class="u">理想</span
+              >のカラダと、心地よい毎日を。
+            </p>
+            <ul class="premier-feats">
+              <li>
+                <span class="pf-badge">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2.5" y="4" width="19" height="13" rx="1.6" />
+                    <path d="M1 20h22" stroke-linecap="round" />
+                  </svg>
+                  <b>オンラインで完結</b>
+                </span>
+                <small
+                  >自宅でいつでも受講可能。移動の手間なく、継続しやすい。</small
+                >
+              </li>
+              <li>
+                <span class="pf-badge">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 3v8a2.4 2.4 0 0 1-4.8 0V3" />
+                    <path d="M4.6 11v10" stroke-linecap="round" />
+                    <path d="M17 3c-2.4 1.6-3 4-3 6.4 0 1.7 1.2 2.6 3 2.6" />
+                    <path d="M17 3v18" stroke-linecap="round" />
+                  </svg>
+                  <b>食事サポート</b>
+                </span>
+                <small
+                  >ライフスタイルに合わせた無理のない食事指導で、理想の体づくりをサポート。</small
+                >
+              </li>
+              <li>
+                <span class="pf-badge">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M21 12.4c0 4-3.9 7.2-8.7 7.2-1 0-2-.1-2.9-.4L4 21l1.5-3.7C3.9 16 3 14.3 3 12.4 3 8.4 6.9 5.2 12 5.2s9 3.2 9 7.2Z"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <b>コーチング</b>
+                </span>
+                <small
+                  >モチベーションを引き出す伴走型のサポートで、目標達成まで導きます。</small
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="premier-visual">
+            <img
+              class="pv-ba"
+              src="img/ba-woman.jpg"
+              alt="オンラインパーソナルでの体型の変化（ビフォーアフター）"
+              width="1000"
+              height="1000"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <figure class="pv-session">
+              <img
+                src="img/session-dark.jpg"
+                alt="自宅で画面越しにトレーナーの動きに合わせてトレーニングしているイメージ"
+                width="900"
+                height="767"
+                loading="lazy"
+              />
+            </figure>
+            <p class="pv-badge">
+              1回30分のマンツーマン指導<br /><b>Zoomで実施</b>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="wrap flow-inner">
+          <p class="flow-label">無料体験<br />の流れ</p>
+          <ol class="flow-steps">
+            <li>
+              <span class="fs-ic">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="10" cy="8" r="3.6" />
+                  <path d="M3.4 20c.6-3.4 3.4-5.4 6.6-5.4 1.1 0 2.1.2 3 .6" />
+                  <path d="M17.5 15v6M14.5 18h6" />
+                </svg>
+              </span>
+              <span>
+                <b>友だち追加</b>
+                <small>LINEで友だち追加</small>
+              </span>
+              <span class="fs-no">01</span>
+            </li>
+            <li>
+              <span class="fs-ic">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="9.5" cy="8" r="3.6" />
+                  <path d="M3 20c.6-3.4 3.3-5.4 6.5-5.4 1.4 0 2.6.4 3.6 1" />
+                  <path d="M14.6 18.4l2 2 4-4.4" />
+                </svg>
+              </span>
+              <span>
+                <b>トレーナー選択</b>
+                <small>プロフィールを見てトレーナーを選択</small>
+              </span>
+              <span class="fs-no">02</span>
+            </li>
+            <li>
+              <span class="fs-ic">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="16" rx="2" />
+                  <path d="M3 10h18M8 3v4M16 3v4" />
+                  <path d="M11 14.5l1.6 1.6 3.4-3.6" />
+                </svg>
+              </span>
+              <span>
+                <b>日程を選択</b>
+                <small>ご希望の日時を選んで予約</small>
+              </span>
+              <span class="fs-no">03</span>
+            </li>
+            <li>
+              <span class="fs-ic">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="2.5" y="4.5" width="19" height="13" rx="1.8" />
+                  <path d="M1 21h22" />
+                </svg>
+              </span>
+              <span>
+                <b>体験セッション</b>
+                <small>Zoomでセッションを実施（30分）</small>
+              </span>
+              <span class="fs-no">04</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
 
     <!-- HERO -->
     <header class="hero">
@@ -2171,15 +2902,28 @@
           </div>
           <div class="hero-visual">
             <div class="hero-stage reveal">
-              <img
-                id="heroTrainer"
-                src="img/tr-ryo-card.jpg"
-                alt="トレーナー RYO（ダイエット）"
-                width="478"
-                height="996"
-                loading="eager"
-                fetchpriority="high"
-              />
+              <div class="hs-photo">
+                <img
+                  id="heroTrainer"
+                  src="img/tr-miho.jpg"
+                  alt="トレーナー Miho（産後・姿勢）"
+                  width="720"
+                  height="960"
+                  loading="eager"
+                />
+                <div class="hs-check" aria-hidden="true">✓</div>
+              </div>
+              <div class="hs-body">
+                <div class="hs-name" id="heroName">Miho</div>
+                <div class="hs-spec" id="heroSpec">産後・姿勢</div>
+                <p class="hs-copy" id="heroCopy">
+                  「痩せる」より先に、<br />動けるからだをつくります。
+                </p>
+                <div class="hs-tags" id="heroTags">
+                  <span>産後ダイエット</span><span>姿勢改善</span
+                  ><span>ピラティス</span>
+                </div>
+              </div>
               <div class="zero"><b>無料</b><span>体験レッスン</span></div>
             </div>
             <div class="picker reveal" id="picker">
@@ -2188,48 +2932,90 @@
                 ><span>指名料 ¥0</span>
               </div>
               <div class="tcards">
-                <div class="tcard" data-i="0">
-                  <div class="chk">✓</div>
-                  <div class="av">
+                <button type="button" class="tcard" data-i="0">
+                  <span class="chk" aria-hidden="true">✓</span>
+                  <span class="av">
                     <img
-                      src="img/tr-ryo.jpg"
-                      alt="RYO"
-                      width="455"
-                      height="620"
+                      src="img/tr-miho-sm.jpg"
+                      alt=""
+                      width="200"
+                      height="267"
                       loading="lazy"
                     />
-                  </div>
-                  <div class="nm">RYO</div>
-                  <div class="sp">ダイエット</div>
-                </div>
-                <div class="tcard" data-i="1">
-                  <div class="chk">✓</div>
-                  <div class="av">
+                  </span>
+                  <span class="nm">Miho</span>
+                  <span class="sp">産後・姿勢</span>
+                </button>
+                <button type="button" class="tcard" data-i="1">
+                  <span class="chk" aria-hidden="true">✓</span>
+                  <span class="av">
                     <img
-                      src="img/tr-mika.jpg"
-                      alt="MIKA"
-                      width="455"
-                      height="620"
+                      src="img/tr-misaki-sm.jpg"
+                      alt=""
+                      width="200"
+                      height="267"
                       loading="lazy"
                     />
-                  </div>
-                  <div class="nm">MIKA</div>
-                  <div class="sp">産後・姿勢</div>
-                </div>
-                <div class="tcard" data-i="2">
-                  <div class="chk">✓</div>
-                  <div class="av">
+                  </span>
+                  <span class="nm">Misaki</span>
+                  <span class="sp">ボディメイク</span>
+                </button>
+                <button type="button" class="tcard" data-i="2">
+                  <span class="chk" aria-hidden="true">✓</span>
+                  <span class="av">
                     <img
-                      src="img/tr-ken.jpg"
-                      alt="KEN"
-                      width="455"
-                      height="620"
+                      src="img/tr-yusuke-sm.jpg"
+                      alt=""
+                      width="200"
+                      height="267"
                       loading="lazy"
                     />
-                  </div>
-                  <div class="nm">KEN</div>
-                  <div class="sp">ボディメイク・理学療法士</div>
-                </div>
+                  </span>
+                  <span class="nm">Yusuke</span>
+                  <span class="sp">アスリート指導</span>
+                </button>
+                <button type="button" class="tcard" data-i="3">
+                  <span class="chk" aria-hidden="true">✓</span>
+                  <span class="av">
+                    <img
+                      src="img/tr-keisuke-sm.jpg"
+                      alt=""
+                      width="200"
+                      height="267"
+                      loading="lazy"
+                    />
+                  </span>
+                  <span class="nm">Keisuke</span>
+                  <span class="sp">理学療法士</span>
+                </button>
+                <button type="button" class="tcard" data-i="4">
+                  <span class="chk" aria-hidden="true">✓</span>
+                  <span class="av">
+                    <img
+                      src="img/tr-goku-sm.jpg"
+                      alt=""
+                      width="200"
+                      height="267"
+                      loading="lazy"
+                    />
+                  </span>
+                  <span class="nm">悟空</span>
+                  <span class="sp">楽しく続ける</span>
+                </button>
+                <button type="button" class="tcard" data-i="5">
+                  <span class="chk" aria-hidden="true">✓</span>
+                  <span class="av">
+                    <img
+                      src="img/tr-suzukijin-sm.jpg"
+                      alt=""
+                      width="200"
+                      height="267"
+                      loading="lazy"
+                    />
+                  </span>
+                  <span class="nm">Suzuki jin</span>
+                  <span class="sp">短期ダイエット</span>
+                </button>
               </div>
               <div class="cap" id="pickcap">
                 合う人を、毎回あなたが指名できる
@@ -2263,6 +3049,21 @@
             </div>
             <div class="ba-meta">
               <div class="res">自己流 → 理想のカラダへ</div>
+              <div class="cmt">継続トレーニング＋食事サポート</div>
+            </div>
+          </div>
+          <div class="ba-card">
+            <div class="ba-full">
+              <img
+                src="img/ba-woman.jpg"
+                alt="Before After（女性）続けて理想のカラダへ"
+                width="1000"
+                height="1000"
+                loading="lazy"
+              />
+            </div>
+            <div class="ba-meta">
+              <div class="res">続けて、理想のカラダへ</div>
               <div class="cmt">継続トレーニング＋食事サポート</div>
             </div>
           </div>
@@ -2377,7 +3178,8 @@
               <span class="lbl">明朗価格</span>
               <h3>入会金<span class="u">0円</span>・わかりやすい料金</h3>
               <p>
-                体験は<b style="color: var(--navy)">無料</b>で受けられます。続けるならオープン記念で<b
+                体験は<b style="color: var(--navy)">無料</b
+                >で受けられます。続けるならオープン記念で<b
                   style="color: var(--coral-d)"
                   >1回 ¥1,500</b
                 >（通常¥3,000・30分・食事サポート付き）。<br /><small
@@ -2406,14 +3208,471 @@
             >
           </h2>
         </div>
-        <img
-          class="reasons-img"
-          src="img/trainers.png"
-          alt="VISIONSのトレーナー：RYO（ダイエット）／MIKA（産後・姿勢）／KEN（ボディメイク）。顔・実績を見て毎回あなたが指名できます"
-          width="1536"
-          height="1024"
-          loading="lazy"
-        />
+        <div class="tgrid">
+          <article class="tperson">
+            <div class="tp-photo">
+              <img
+                src="img/tr-miho.jpg"
+                alt="トレーナー Miho（産後・姿勢・ピラティス）"
+                width="720"
+                height="960"
+                loading="lazy"
+              />
+            </div>
+            <div class="body">
+              <h3 class="nm">Miho</h3>
+              <div class="sp">産後・姿勢・ピラティス</div>
+              <div class="meta">
+                FTPマットピラティス／産前産後・マタニティピラティス／介護職員初任者研修｜指導歴4年
+              </div>
+              <ul class="tp-tags">
+                <li>産後ダイエット</li>
+                <li>姿勢改善</li>
+                <li>腰痛・肩こり</li>
+                <li>マタニティ</li>
+              </ul>
+              <p class="tp-lead">
+                痩せることより、まず「動けるからだ」をつくるタイプです。腰や肩が痛い、姿勢が気になる、産後から戻らない——そういう方の30分をつくるのが得意です。マット1枚あれば始められます。
+              </p>
+              <details class="tp-more">
+                <summary>Mihoのプロフィールを全部見る</summary>
+                <div class="tp-detail">
+                  <h4>得意分野</h4>
+                  <ul>
+                    <li>腰痛・肩こりのコンディショニング</li>
+                    <li>反り腰・猫背などの姿勢改善</li>
+                    <li>産後ダイエット</li>
+                    <li>マタニティ期のコンディショニング</li>
+                    <li>体幹（インナーマッスル）強化</li>
+                    <li>「痩せる」より「引き締める」ボディメイク</li>
+                    <li>シニア世代の健康寿命づくり</li>
+                    <li>マットと自重だけで完結するトレーニング（器具ゼロ）</li>
+                    <li>運動がまったく初めての方の第一歩</li>
+                    <li>食事サポート</li>
+                  </ul>
+                  <h4>実績</h4>
+                  <ul>
+                    <li>
+                      ピラティス指導歴4年（グループレッスン →
+                      プライベートスタジオ開業）
+                    </li>
+                    <li>
+                      女性専用プライベートスタジオを開業し、今までに100名以上を指導
+                    </li>
+                    <li>
+                      都内で子連れ参加OKの産後ママ向けグループレッスンを継続担当
+                    </li>
+                    <li>
+                      公民館のシニア向けレッスンで、バス・タクシーでしか来られなかった方が自分の足で歩いて通えるように
+                    </li>
+                    <li>介護施設（デイサービス）で介護士として2年勤務</li>
+                    <li>
+                      対面・オンライン、個別・グループのすべての形式で指導
+                    </li>
+                  </ul>
+                  <h4>こんな方に選ばれています</h4>
+                  <ul>
+                    <li>腰痛・肩こりが慢性化していて、まず体を整えたい</li>
+                    <li>姿勢が悪いと言われる。反り腰・猫背を直したい</li>
+                    <li>産後、体型も体力も戻らないまま時間だけが過ぎている</li>
+                    <li>妊娠中でも安全に動ける形を知りたい</li>
+                    <li>ハードな筋トレは苦手。地味でも確実に効く運動がいい</li>
+                    <li>体重より、見た目のラインを引き締めたい</li>
+                    <li>
+                      運動経験がほとんどなく、何から始めればいいか分からない
+                    </li>
+                    <li>育児や介護で家を空けられない</li>
+                    <li>60代以降。いつまでも自分の足で歩けるからだでいたい</li>
+                    <li>器具も広い場所もない。マット1枚で完結させたい</li>
+                  </ul>
+                  <h4>性格・スタイル</h4>
+                  <p>
+                    私自身、産後の腰痛からピラティスを始めました。体重が大きく減ったわけではないのに姿勢が変わり、腰の痛みが引いて、ズボンのサイズが落ちた。「こういう変え方があるんだ」と驚いたのが、今の指導の原点です。
+                  </p>
+                  <p>
+                    なので、いきなり追い込むことはしません。まず体を整えて、動ける状態をつくってから負荷を上げます。地味な動きが続く時期もあるので、「今なぜこれをやるのか」を毎回言葉にしてお伝えします。画面越しでも迷わないよう、私が見本を見せながら、あなたの動きも必ず確認します。
+                  </p>
+                  <p>
+                    お一人おひとりに寄り添ったレッスンを心掛けています。レッスンのことだけではなく、仕事や育児、プライベートのお話をしてくださる方も多く、心も身体もリフレッシュできるレッスンを目指しています。得意・不得意は正直にお話しします。とにかく重い重量を挙げて鍛え上げたい方には、私より合うトレーナーがいます。そこは隠しません。
+                  </p>
+                  <h4>目標</h4>
+                  <p>
+                    運動は、いくつからでも間に合う。介護の現場で、80歳からスクワットを始めて100歳で背筋を伸ばして歩いている方に出会って、それを確信しました。産後の方にも、シニアの方にも、家から出られない方にも、届く形で運動を届けたい。オンラインを選んだのはそのためです。
+                  </p>
+                </div>
+              </details>
+              <a class="pick-btn" href="https://lin.ee/Q5ynBlo"
+                >Mihoを指名する</a
+              >
+            </div>
+          </article>
+
+          <article class="tperson">
+            <div class="tp-photo">
+              <img
+                src="img/tr-misaki.jpg"
+                alt="トレーナー Misaki（ボディメイク・産後）"
+                width="720"
+                height="960"
+                loading="lazy"
+              />
+            </div>
+            <div class="body">
+              <h3 class="nm">Misaki</h3>
+              <div class="sp">ボディメイク・産後</div>
+              <div class="meta">指導歴8年</div>
+              <ul class="tp-tags">
+                <li>バルクアップ</li>
+                <li>くびれ・ヒップ</li>
+                <li>姿勢改善</li>
+                <li>宅トレ</li>
+              </ul>
+              <p class="tp-lead">
+                ゴリゴリ追い込むより、生活のなかで続く形をつくるタイプです。筋肉をつけたい方には負荷の上げ方を、時間が取れない方には短時間で終わる形を組み立てます。
+              </p>
+              <details class="tp-more">
+                <summary>Misakiのプロフィールを全部見る</summary>
+                <div class="tp-detail">
+                  <h4>得意分野</h4>
+                  <ul>
+                    <li>筋肉増量（バルクアップ）</li>
+                    <li>体脂肪を落としながらの体づくり</li>
+                    <li>お腹・ヒップまわりの引き締め</li>
+                    <li>デスクワーク由来の肩・腰のコンディショニング</li>
+                    <li>反り腰・姿勢改善（呼吸と肋骨から）</li>
+                    <li>マットピラティス</li>
+                    <li>器具ゼロの自宅トレーニング</li>
+                    <li>食事サポート</li>
+                    <li>産後の体型戻し</li>
+                    <li>マタニティ期のコンディショニング</li>
+                  </ul>
+                  <h4>実績</h4>
+                  <ul>
+                    <li>
+                      指導歴8年（グループレッスン → パーソナルトレーナー）
+                    </li>
+                    <li>
+                      スタジオバイク有酸素のインストラクターとして、レッスンを組み立て続けた構成力
+                    </li>
+                    <li>幅広い世代・男女を問わずパーソナルセッションを担当</li>
+                    <li>自身もレジスタンストレーニングを4年継続</li>
+                  </ul>
+                  <h4>こんな方に選ばれています</h4>
+                  <ul>
+                    <li>筋肉をつけたいが、ジムに通う時間が読めない</li>
+                    <li>デスクワークで肩・腰が重い。運動はほぼしていない</li>
+                    <li>体脂肪を落としつつ、体は大きくしたい</li>
+                    <li>出張や在宅が多く、決まった場所で運動できない</li>
+                    <li>一人だと続かない。運動はかなり久しぶり</li>
+                    <li>産後、体型が戻らないまま時間だけが過ぎている</li>
+                    <li>子どもがいて、ジムに通う時間がとれない</li>
+                    <li>
+                      女性のからだの変化（ホルモン・年齢）に配慮してほしい
+                    </li>
+                  </ul>
+                  <h4>性格・スタイル</h4>
+                  <p>
+                    明るく、雰囲気を楽しく。これがレッスンの基本です。スタジオで大勢を前に「今日も来てよかった」と思ってもらう仕事を続けてきたので、場をつくるのは得意です。
+                  </p>
+                  <p>
+                    そのうえで、関わり方は人によって変えます。引っ張ったほうが伸びる方には熱量を上げ、ゆっくり進めたい方には合わせる。続けられる形はひとりずつ違うので、決めつけません。押し売りもしません。「なぜ今のあなたにこれが必要か」をお話しして、納得いただいてから進めます。
+                  </p>
+                  <h4>目標</h4>
+                  <p>
+                    「通いたくても通えない」人に届くこと。仕事で時間が読めなくても、産後でも、体調が万全でなくても、続けられる形を一緒に見つけます。
+                  </p>
+                </div>
+              </details>
+              <a class="pick-btn" href="https://lin.ee/Q5ynBlo"
+                >Misakiを指名する</a
+              >
+            </div>
+          </article>
+
+          <article class="tperson">
+            <div class="tp-photo">
+              <img
+                src="img/tr-yusuke.jpg"
+                alt="トレーナー Yusuke（アスリート・パフォーマンス）"
+                width="720"
+                height="960"
+                loading="lazy"
+              />
+            </div>
+            <div class="body">
+              <h3 class="nm">Yusuke</h3>
+              <div class="sp">アスリート・パフォーマンス</div>
+              <div class="meta">
+                Strength &amp; Conditioning Coach／CSCS・JATI-ATI
+              </div>
+              <ul class="tp-tags">
+                <li>競技力向上</li>
+                <li>ケガ予防</li>
+                <li>短期ダイエット</li>
+                <li>姿勢改善</li>
+              </ul>
+              <p class="tp-lead">
+                トレーナーは「きついトレーニングをさせる人」ではありません。あなたの目標まで最短距離で導くパートナーです。正しい知識と継続できる環境があれば、身体は必ず変わります。
+              </p>
+              <details class="tp-more">
+                <summary>Yusukeのプロフィールを全部見る</summary>
+                <div class="tp-detail">
+                  <h4>得意分野</h4>
+                  <ul>
+                    <li>
+                      アスリートのパフォーマンス向上（サッカー・アメリカンフットボール）
+                    </li>
+                    <li>筋力・パワートレーニング</li>
+                    <li>スピード・アジリティトレーニング</li>
+                    <li>短期ダイエット（リバウンド防止）</li>
+                    <li>ボディメイク・食事サポート</li>
+                    <li>マタニティ・産後ダイエット</li>
+                    <li>経営者向けコンディショニング</li>
+                    <li>姿勢改善（O脚・X脚）</li>
+                    <li>ケガ予防・リハビリ・慢性痛改善</li>
+                    <li>どんなクライアントでも、ニーズに合わせて導く</li>
+                  </ul>
+                  <h4>実績</h4>
+                  <ul>
+                    <li>ドイツのサッカークラブでフィジカルコーチを担当</li>
+                    <li>プロ野球・大学・高校のスポーツ現場で指導</li>
+                    <li>アメリカンフットボール・サッカーの選手を中心に指導</li>
+                  </ul>
+                  <h4>こんな方に選ばれています</h4>
+                  <ul>
+                    <li>スポーツのパフォーマンスを上げたい</li>
+                    <li>ケガをしにくい身体をつくりたい</li>
+                    <li>正しいフォームを身につけたい</li>
+                    <li>筋力・スピードを効率よく伸ばしたい</li>
+                    <li>科学的な根拠のある指導を受けたい</li>
+                    <li>一人では継続できない</li>
+                  </ul>
+                  <h4>性格・スタイル</h4>
+                  <p>
+                    「なぜこのトレーニングを行うのか」を大切にしています。ただ追い込むだけではなく、一人ひとりの目標や競技レベル、身体の状態を分析し、最適なプログラムを作成します。
+                  </p>
+                  <p>
+                    プロスポーツの現場で培った経験を活かし、初心者からアスリートまで、それぞれに合った指導を提供します。継続できることを第一に考え、身体だけでなく生活習慣やコンディショニングまでサポートします。
+                  </p>
+                  <h4>目標</h4>
+                  <p>
+                    「理想の身体」と「最高のパフォーマンス」を最短で実現すること。そのために、一人ひとりに合わせた最適なトレーニングを提供します。
+                  </p>
+                </div>
+              </details>
+              <a class="pick-btn" href="https://lin.ee/Q5ynBlo"
+                >Yusukeを指名する</a
+              >
+            </div>
+          </article>
+
+          <article class="tperson">
+            <div class="tp-photo">
+              <img
+                src="img/tr-keisuke.jpg"
+                alt="トレーナー Keisuke（理学療法士・姿勢改善）"
+                width="720"
+                height="960"
+                loading="lazy"
+              />
+            </div>
+            <div class="body">
+              <h3 class="nm">Keisuke</h3>
+              <div class="sp">理学療法士・姿勢改善</div>
+              <div class="meta">理学療法士／NSCA-CPT｜臨床経験10年</div>
+              <ul class="tp-tags">
+                <li>姿勢・動作分析</li>
+                <li>腰痛・肩こり</li>
+                <li>リバウンド防止</li>
+                <li>運動初心者</li>
+              </ul>
+              <p class="tp-lead">
+                身体の悩みを改善するには、根性論ではなく「なぜその症状や姿勢になるのか」を理解することが大切です。落ち着いた雰囲気で、ご自身のペースで続けられるよう丁寧に寄り添います。
+              </p>
+              <details class="tp-more">
+                <summary>Keisukeのプロフィールを全部見る</summary>
+                <div class="tp-detail">
+                  <h4>得意分野</h4>
+                  <ul>
+                    <li>リバウンドしにくいダイエットサポート</li>
+                    <li>筋力アップ・ボディメイク（バルクアップ）</li>
+                    <li>理学療法士の知識を活かした姿勢・動作分析と改善</li>
+                    <li>食事アドバイス・生活習慣のサポート</li>
+                    <li>肩こり・腰痛など身体の不調予防・改善</li>
+                    <li>運動初心者でも安心して取り組めるトレーニング指導</li>
+                  </ul>
+                  <h4>実績</h4>
+                  <ul>
+                    <li>理学療法士として臨床経験10年</li>
+                    <li>医療レベルの姿勢・動作評価による身体改善</li>
+                    <li>
+                      ボクササイズを取り入れた楽しく続けられるダイエット指導
+                    </li>
+                  </ul>
+                  <h4>こんな方に選ばれています</h4>
+                  <ul>
+                    <li>痩せたいけれどジムに通う時間がない方</li>
+                    <li>育児や仕事の合間に効率よく運動したい方</li>
+                    <li>
+                      デスクワークや育児で姿勢の崩れ、肩こり・腰痛に悩んでいる方
+                    </li>
+                    <li>運動初心者で何から始めればいいかわからない方</li>
+                    <li>腰や膝に不安があり、安全にトレーニングしたい方</li>
+                    <li>ジムやダイエットが続かず、何度も挫折してきた方</li>
+                    <li>自己流では結果が出ず、正しい方法で身体を変えたい方</li>
+                  </ul>
+                  <h4>性格・スタイル</h4>
+                  <p>
+                    理学療法士として10年間医療現場で培った知識と経験を活かし、身体の仕組みに基づいたトレーニングをご提供します。医学的な視点から、一人ひとりの身体に合わせた「安全で続けやすいトレーニング」を大切にしています。
+                  </p>
+                  <p>
+                    医療系国家資格を持つトレーナーだからこそ、姿勢や動作を細かく分析し、肩こりや腰痛などの身体の不調にも配慮しながら根本的な改善を目指します。
+                  </p>
+                  <p>
+                    私自身も2児のパパで、共働きをしながら週5回トレーニングを続けています。忙しい毎日の中でも継続できる運動方法や、育児と両立しやすい習慣づくりなど、実体験をもとにサポートいたします。大きな声で盛り上げるタイプではありませんが、一つひとつの疑問や不安を解消しながら、ご自身のペースで安心して続けられるようサポートいたします。お子さまと一緒にご参加いただいても大丈夫です。
+                  </p>
+                  <h4>目標</h4>
+                  <p>
+                    無理な食事制限や過度な運動ではなく、ご自身の生活スタイルに合った方法を提案していきます。「身体を変えたい」「健康的な習慣を身につけたい」と思ったその気持ちを大切に、目標達成までしっかりサポートいたします。
+                  </p>
+                </div>
+              </details>
+              <a class="pick-btn" href="https://lin.ee/Q5ynBlo"
+                >Keisukeを指名する</a
+              >
+            </div>
+          </article>
+
+          <article class="tperson">
+            <div class="tp-photo">
+              <img
+                src="img/tr-goku.jpg"
+                alt="トレーナー 悟空（楽しく続ける）"
+                width="720"
+                height="960"
+                loading="lazy"
+              />
+            </div>
+            <div class="body">
+              <h3 class="nm">悟空</h3>
+              <div class="sp">楽しく続ける</div>
+              <div class="meta">
+                エグゼクティブトレーナー／スポーツモデル競技 2024年 入賞
+              </div>
+              <ul class="tp-tags">
+                <li>運動が苦手</li>
+                <li>食欲コントロール</li>
+                <li>バルクアップ</li>
+                <li>ストレス管理</li>
+              </ul>
+              <p class="tp-lead">
+                「続かなかったのはあなたのせいじゃなくて、つまらなかったから」——まず1回、笑いに来てください。専門用語は使いません（使ったら罰ゲーム）。サボりも責めません。
+              </p>
+              <details class="tp-more">
+                <summary>悟空のプロフィールを全部見る</summary>
+                <div class="tp-detail">
+                  <h4>得意分野</h4>
+                  <ul>
+                    <li>お笑い</li>
+                    <li>リバウンドしないダイエット</li>
+                    <li>食欲コントロール</li>
+                    <li>バルクアップ</li>
+                    <li>姿勢改善</li>
+                    <li>食事サポート</li>
+                    <li>ストレス管理</li>
+                  </ul>
+                  <h4>実績</h4>
+                  <ul>
+                    <li>スポーツモデル競技 2024年 入賞</li>
+                  </ul>
+                  <h4>こんな方に選ばれています</h4>
+                  <ul>
+                    <li>ジムが怖い、マッチョに囲まれたくない</li>
+                    <li>過去に3日坊主で終わった経験がある</li>
+                    <li>キツいのは無理。楽しくないと続かない</li>
+                    <li>褒められて伸びるタイプ</li>
+                  </ul>
+                  <h4>性格・スタイル</h4>
+                  <p>
+                    元気だけは日本一。筋トレ中に笑わせにいくので、キツさを感じるヒマがありません。フォームは何度間違えてもOK、できたら全力で褒めます。落ち込んで来ても、帰る頃には笑ってます。トレーニングの悩みじゃなくても話してください、全部聞きます。
+                  </p>
+                  <h4>目標</h4>
+                  <p>
+                    「運動キライを、運動スキに」——あなたが「運動って楽しいかも」と思うまで付き合います。
+                  </p>
+                </div>
+              </details>
+              <a class="pick-btn" href="https://lin.ee/Q5ynBlo"
+                >悟空を指名する</a
+              >
+            </div>
+          </article>
+
+          <article class="tperson">
+            <div class="tp-photo">
+              <img
+                src="img/tr-suzukijin.jpg"
+                alt="トレーナー Suzuki jin（短期ダイエット・ボディメイク）"
+                width="720"
+                height="960"
+                loading="lazy"
+              />
+            </div>
+            <div class="body">
+              <h3 class="nm">Suzuki jin</h3>
+              <div class="sp">短期ダイエット・ボディメイク</div>
+              <div class="meta">NSCA-CPT｜フィジーク大会 2022・2024 優勝</div>
+              <ul class="tp-tags">
+                <li>短期ダイエット</li>
+                <li>慢性痛・O脚X脚</li>
+                <li>キックボクシング</li>
+                <li>経営者向け</li>
+              </ul>
+              <p class="tp-lead">
+                頑張らせるのではなく、頑張らなくても続く設計をします。声を張りません。追い込みません。「なぜこのメニューか」を必ず説明します。まずは現状分析からどうぞ。
+              </p>
+              <details class="tp-more">
+                <summary>Suzuki jinのプロフィールを全部見る</summary>
+                <div class="tp-detail">
+                  <h4>得意分野</h4>
+                  <ul>
+                    <li>ボディメイク</li>
+                    <li>短期ダイエット（リバウンド防止）</li>
+                    <li>バルクアップ</li>
+                    <li>姿勢改善・慢性痛改善</li>
+                    <li>O脚・X脚改善</li>
+                    <li>キックボクシングエクササイズ</li>
+                    <li>食事サポート</li>
+                    <li>経営者向けコンディショニング</li>
+                  </ul>
+                  <h4>実績</h4>
+                  <ul>
+                    <li>継続率95%以上</li>
+                    <li>フィジーク大会 2022・2024 優勝</li>
+                    <li>NSCA-CPT（米国資格）</li>
+                  </ul>
+                  <h4>こんな方に選ばれています</h4>
+                  <ul>
+                    <li>感覚論・根性論ではなく、理屈で納得して取り組みたい</li>
+                    <li>体育会系のノリが苦手</li>
+                    <li>仕事や生活の悩みも含めて、じっくり話を聞いてほしい</li>
+                    <li>経営者・専門職など、思考で生きている方</li>
+                  </ul>
+                  <h4>性格・スタイル</h4>
+                  <p>
+                    「なぜ痩せるか」を説明できるトレーナー——静かに、確実に、結果へ。あなたの体のデータと生活習慣を分析し、「なぜこのメニューか」を必ず説明します。納得できないメニューは続かない——12年でわかった結論です。
+                  </p>
+                  <p>
+                    セッションの半分は対話です。体は生活の結果。仕事のストレス、睡眠、食環境まで一緒に整理します。クライアントの多くが「トレーナーというより相談相手」と言ってくれます。
+                  </p>
+                </div>
+              </details>
+              <a class="pick-btn" href="https://lin.ee/Q5ynBlo"
+                >Suzuki jinを指名する</a
+              >
+            </div>
+          </article>
+        </div>
         <div class="cred-block">
           <p class="cred-lead">
             国家資格・理学療法士のトレーナーが在籍しています。
@@ -2431,7 +3690,6 @@
         <p class="note-c">割り当てじゃない。あなたが、選ぶ。</p>
       </div>
     </section>
-
 
     <!-- COMPARISON -->
     <section>
@@ -2546,15 +3804,15 @@
         <div class="sec-head">
           <div class="eyebrow">Price</div>
           <h2>
-            まずは、<br />無料体験から。<span class="sub">30分・オンラインで完結</span>
+            まずは、<br />無料体験から。<span class="sub"
+              >30分・オンラインで完結</span
+            >
           </h2>
         </div>
         <div class="plan feature">
           <span class="tag">いちばん人気</span>
           <h3>無料体験（30分）</h3>
-          <div class="price">
-            ¥0<small>/ 体験（30分）</small>
-          </div>
+          <div class="price">¥0<small>/ 体験（30分）</small></div>
           <p class="opts">気になるトレーナーを選んで、まずは無料でお試し。</p>
           <p class="opts">体験無料・入会金0円</p>
         </div>
@@ -2730,51 +3988,136 @@
           { threshold: 0.08 },
         ).observe(heroCta);
       }
+      /* ===== ヒーローのトレーナーカード（在籍6名） ===== */
       const cards = [...document.querySelectorAll("#picker .tcard")];
-      const caps = [
-        "RYOを指名 — ダイエット特化",
-        "MIKAを指名 — 産後・姿勢",
-        "KENを指名 — ボディメイク",
+      const TRAINERS = [
+        {
+          slug: "miho",
+          name: "Miho",
+          spec: "産後・姿勢",
+          copy: "「痩せる」より先に、<br />動けるからだをつくります。",
+          tags: ["産後ダイエット", "姿勢改善", "ピラティス"],
+          cap: "Mihoを指名 — 産後・姿勢・ピラティス",
+        },
+        {
+          slug: "misaki",
+          name: "Misaki",
+          spec: "ボディメイク",
+          copy: "生活のなかで続く形を、<br />一緒に組み立てます。",
+          tags: ["バルクアップ", "くびれ・ヒップ", "宅トレ"],
+          cap: "Misakiを指名 — ボディメイク・産後",
+        },
+        {
+          slug: "yusuke",
+          name: "Yusuke",
+          spec: "アスリート指導",
+          copy: "目標まで最短距離で導く、<br />科学的なプログラム。",
+          tags: ["競技力向上", "ケガ予防", "短期ダイエット"],
+          cap: "Yusukeを指名 — アスリート・パフォーマンス",
+        },
+        {
+          slug: "keisuke",
+          name: "Keisuke",
+          spec: "理学療法士",
+          copy: "医療の視点で、<br />安全に続けられる形を。",
+          tags: ["姿勢・動作分析", "腰痛・肩こり", "運動初心者"],
+          cap: "Keisukeを指名 — 理学療法士・姿勢改善",
+        },
+        {
+          slug: "goku",
+          name: "悟空",
+          spec: "楽しく続ける",
+          copy: "運動キライを、運動スキに。<br />まず1回、笑いに来てください。",
+          tags: ["運動が苦手", "食欲コントロール", "バルクアップ"],
+          cap: "悟空を指名 — 楽しく続ける",
+        },
+        {
+          slug: "suzukijin",
+          name: "Suzuki jin",
+          spec: "短期ダイエット",
+          copy: "「なぜ痩せるか」を<br />説明できるトレーナーです。",
+          tags: ["短期ダイエット", "慢性痛改善", "経営者向け"],
+          cap: "Suzuki jinを指名 — 短期ダイエット・ボディメイク",
+        },
       ];
-      const heroImgs = [
-        "img/tr-ryo-card.jpg",
-        "img/tr-mika-card.jpg",
-        "img/tr-ken-card.jpg",
-      ];
+      const heroImgs = TRAINERS.map((t) => `img/tr-${t.slug}.jpg`);
       heroImgs.forEach((src) => {
         const im = new Image();
         im.src = src;
       }); // preload for smooth swap
       const hero = document.getElementById("heroTrainer");
+      const heroName = document.getElementById("heroName");
+      const heroSpec = document.getElementById("heroSpec");
+      const heroCopy = document.getElementById("heroCopy");
+      const heroTags = document.getElementById("heroTags");
+      const pickcap = document.getElementById("pickcap");
+      const stage = document.querySelector(".hero-stage");
       let idx = 0;
-      function sel(i) {
-        cards.forEach((c, k) => c.classList.toggle("active", k === i));
-        document.getElementById("pickcap").textContent = caps[i];
-        if (hero && hero.getAttribute("src") !== heroImgs[i]) {
-          hero.style.opacity = "0";
-          setTimeout(() => {
-            hero.onload = () => {
-              hero.style.opacity = "1";
-            };
-            hero.src = heroImgs[i];
-            if (hero.complete) hero.style.opacity = "1";
-          }, 150);
+
+      // 写真と名前は必ず同時に差し替える（別人の写真に別人の名前が乗る瞬間をつくらない）
+      function paint(t, src) {
+        if (hero) {
+          hero.src = src;
+          hero.alt = `トレーナー ${t.name}（${t.spec}）`;
         }
+        if (pickcap) pickcap.textContent = t.cap;
+        if (heroName) heroName.textContent = t.name;
+        if (heroSpec) heroSpec.textContent = t.spec;
+        if (heroCopy) heroCopy.innerHTML = t.copy;
+        if (heroTags)
+          heroTags.innerHTML = t.tags
+            .map((tag) => `<span>${tag}</span>`)
+            .join("");
+      }
+
+      function sel(i) {
+        const t = TRAINERS[i];
+        if (!t) return;
+        cards.forEach((c, k) => {
+          c.classList.toggle("active", k === i);
+          c.setAttribute("aria-pressed", String(k === i));
+        });
+        const src = heroImgs[i];
+        if (!hero || hero.getAttribute("src") === src) {
+          paint(t, src);
+          return;
+        }
+        if (stage) stage.classList.add("is-swapping");
+        const loaded = new Promise((done) => {
+          const pre = new Image();
+          pre.onload = pre.onerror = done;
+          pre.src = src;
+          if (pre.complete) done(); // 起動時にプリロード済みなら即時
+        });
+        const settle = new Promise((r) => setTimeout(r, 180)); // フェードアウトの尺
+        // 読み込みが返ってこなくてもカードを空のまま固めない
+        const bailout = new Promise((r) => setTimeout(r, 700));
+        Promise.all([Promise.race([loaded, bailout]), settle]).then(() => {
+          if (heroImgs[idx] !== src) return; // 連打・自動送りに追い越されたら破棄
+          paint(t, src);
+          if (stage) stage.classList.remove("is-swapping");
+        });
       }
       sel(0);
-      let timer = setInterval(() => {
-        idx = (idx + 1) % cards.length;
-        sel(idx);
-      }, 2200);
+      const ROTATE_MS = 2600;
+      // 自動切替は「動きを減らす」設定の環境では回さない（手動の指名は従来どおり動く）
+      const noMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const rotate = () =>
+        noMotion
+          ? null
+          : setInterval(() => {
+              idx = (idx + 1) % cards.length;
+              sel(idx);
+            }, ROTATE_MS);
+      let timer = rotate();
       cards.forEach((c, i) =>
         c.addEventListener("click", () => {
           idx = i;
           sel(i);
-          clearInterval(timer);
-          timer = setInterval(() => {
-            idx = (idx + 1) % cards.length;
-            sel(idx);
-          }, 2200);
+          if (timer) clearInterval(timer);
+          timer = rotate();
         }),
       );
 
@@ -2792,7 +4135,6 @@
         var fy = document.getElementById("fy");
         if (fy) fy.textContent = new Date().getFullYear();
       })();
-
     </script>
   </body>
 </html>
